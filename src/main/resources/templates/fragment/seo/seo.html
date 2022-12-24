@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <th:block th:fragment="seo">
+        <link th:if="${seo.canonical!=null && seo.canonical!=''}" rel="canonical" th:href="${seo.canonical}">
+        <meta th:if="${seo.description!=null && seo.description!=''}" name="description" th:content="${seo.description}">
+        <meta th:if="${seo.canonical!=null && seo.canonical!=''}" name="keywords" th:content="${seo.keywords}">
+        <meta th:if="${seo.canonical!=null && seo.canonical!=''}" property="og:url" th:content="${seo.canonical}">
+        <meta property="og:type" content="website">
+        <meta th:if="${seo.title!=null && seo.title!=''}" property="og:title" th:content="${seo.title}">
+        <meta th:if="${seo.description!=null && seo.description!=''}" property="og:description" th:content="${seo.description}">
+        <meta th:if="${seo.image!=null && seo.image!=''}" property="og:image" th:content="${seo.image}">
+        <meta th:if="${seo.image!=null && seo.image!=''}" property="og:image:width" content="720">
+        <meta th:if="${seo.image!=null && seo.image!=''}" property="og:image:height" content="720">
+        <link th:each="dns:${seo.dns_prefetch}" rel="dns-prefetch" th:href="${dns}">
+        <script th:if="${seo.schema!=null && seo.schema!=''}" type="application/ld+json" th:utext="${seo.schema}"></script>
+    </th:block>
+</body>
+</html>

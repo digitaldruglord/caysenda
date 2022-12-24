@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- ========== MAIN CONTENT ========== -->
+<main th:fragment="content" id="content" role="main" class="bg-white">
+    <!-- breadcrumb -->
+    <div class="bg-gray-13 bg-md-transparent">
+        <div class="container">
+            <!-- breadcrumb -->
+            <div class="my-md-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1">
+                            <a href="/">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active"
+                            th:text="${data.name}"
+                            aria-current="page"/>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End breadcrumb -->
+        </div>
+    </div>
+    <div class="container content">
+
+        <div th:utext="${data.content}"></div>
+        <script>
+            $(document).on('ready', function () {
+                $("#provinces").selectpicker('refresh');
+                $("#dictricts").selectpicker('refresh');
+                $("#wards").selectpicker('refresh');
+            })
+
+        </script>
+    </div>
+
+    <!-- End breadcrumb -->
+    <div class="container">
+
+        <!-- Related products -->
+        <div class="slick lazy" data-loader="ajaxloader" data-tab="framebestseller"></div>
+        <!-- End Related products -->
+        <div th:replace="fragment/brand/brand-fragment::brand"></div>
+    </div>
+</main>
+<!-- ========== END MAIN CONTENT ========== -->
+</body>
+</html>

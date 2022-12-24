@@ -1,0 +1,38 @@
+
+$pendding : #d2ef1d;
+$cancel   :red;
+$success  : #04f13f;
+$processing : #a15cea;
+$failed     : #ff0000;
+$shipping   : #e8aa2b;
+$refunded   : #f50bbb;
+$bgColorStatus :(
+        "pendding":("bg":#d2ef1d,"text":#d608ec),
+        "cancel":("bg":red,"text":#ffffff),
+        "success":("bg":#04f13f,"text":#ffffff),
+        "processing":("bg":#a15cea,"text":#f8f8f8),
+        "awaitingadditionaldelivery":("bg":#3187ef,"text":#f8f8f8),
+        "failed":("bg":#ff0000,"text":#fcfcfc),
+        "shipping":("bg":#e8aa2b,"text":#ffffff),
+        "refunded":("bg":#f50bbb,"text":#000),
+        "waitting":("bg":#f50bbb,"text":#000),
+        "check":("bg":#b58e00,"text":#ffffff),
+        "notenough":("bg":#f50202,"text":#ffffff),
+        "level1":("bg":#0da225,"text":#ffffff),
+        "level2":("bg":#f34f22,"text":#ffffff),
+        "level3":("bg":#e3924d,"text":#ffffff),
+        "level5":("bg":#0da225,"text":#ffffff),
+        "level6":("bg":#0da225,"text":#ffffff),
+);
+@mixin createOrderStatus($status,$bg,$textcolor){
+  .status-#{$status}{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $bg;
+    color: $textcolor;
+    font-weight: bold;
+  }
+}
+@each $item,$color in $bgColorStatus{
+  @include createOrderStatus($item,map_get($color,bg),map_get($color,text));
+}

@@ -1,0 +1,14 @@
+.tab-content-address{
+  padding: 10px 0;
+  .tab-pane-address{
+    display: none;
+    &.show{
+      display: block;
+    }
+    p{
+      &:hover{
+        color: #f35500;
+      }
+    }
+  }
+}

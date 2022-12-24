@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- ========== MAIN CONTENT ========== -->
+<main th:fragment="content" id="content" role="main" class="bg-white">
+    <!-- breadcrumb -->
+    <div class="bg-gray-13 bg-md-transparent">
+        <div class="container">
+            <!-- breadcrumb -->
+            <div class="my-md-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1">
+                            <a href="/">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1">
+                            <a href="/san-pham">Sản phẩm</a>
+                        </li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1">
+                            <a th:href="@{'/'+${categoryDefault.slug}}"
+                               th:text="${categoryDefault.name}"/>
+                        </li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active"
+                            th:text="${product.nameVi}"
+                            aria-current="page"/>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End breadcrumb -->
+        </div>
+    </div>
+    <!-- End breadcrumb -->
+    <div class="container">
+        <!-- Single Product Body -->
+        <div class="mb-xl-14 mb-4">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div id="sliderSyncingNav" class="js-slick-carousel u-slick mb-2"
+                         data-infinite="true"
+                         data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle"
+                         data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4"
+                         data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4"
+                         data-nav-for="#sliderSyncingThumb">
+                        <div th:if="${product.video!=null && product.video!=''}" class="js-slide">
+                            <video style="width: 100%;height: 447px" autoplay muted controls>
+                                <source th:src="${product.video}" type="video/mp4">
+                            </video>
+
+                        </div>
+                        <div th:each="image:${product.gallery}" class="js-slide">
+                            <img class="img-fluid" th:src="@{${image}}" th:alt="${product.nameVi}">
+                        </div>
+                    </div>
+                    <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off"
+                         data-infinite="true"
+                         data-slides-show="5"
+                         data-is-thumbs="true"
+                         data-nav-for="#sliderSyncingNav">
+                        <div th:each="image:${product.gallery}" class="js-slide" style="cursor: pointer;">
+                            <img class="img-fluid" th:src="@{${image}}" th:alt="${product.nameVi}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 mb-md-6 mb-lg-0" th:switch="${isRetailt}" >
+                    <th:block th:case="true">
+                        <th:block th:if="${!isExistGroup}">
+                            <div  th:replace="product-pages/product-detailt/fragment/summary::summary-type-1"></div>
+                        </th:block>
+                        <th:block th:unless="${!isExistGroup}">
+                            <div  th:replace="product-pages/product-detailt/fragment/summary::summary-child-type-1"></div>
+                        </th:block>
+
+                    </th:block>
+                    <th:block th:case="*">
+                        <th:block th:if="${!isExistGroup}">
+                            <div  th:replace="product-pages/product-detailt/fragment/summary::summary-type-2"></div>
+                        </th:block>
+                        <th:block th:unless="${!isExistGroup}">
+                            <div  th:replace="product-pages/product-detailt/fragment/summary::summary-child-type-2"></div>
+                        </th:block>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+        <!-- End Single Product Body -->
+        <div class="slick lazy"  data-loader="ajaxloader" th:attr="data-category=${categoryDefault.id},data-tab='related'" ></div>
+        <!-- Single Product Tab -->
+        <div class="mb-8">
+            <div class="position-relative position-md-static px-md-6">
+                <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-0 pb-1 pb-xl-0 mb-n1 mb-xl-0" id="pills-tab-8" role="tablist">
+                    <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
+                        <a class="nav-link active" id="Jpills-one-example1-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">Nội dung</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Tab Content -->
+            <div class="borders-radius-17 border p-4 mt-4 mt-md-0 px-lg-10 py-lg-9">
+                <div class="tab-content" id="Jpills-tabContent">
+                    <div class="tab-pane fade active show" id="Jpills-one-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
+                        <div class="d-flex justify-content-center">
+                            <table class="table w-100">
+                                <tbody>
+                                <tr th:if="${product.nameVi!=null}">
+                                    <th scope="row">Tên sản phẩm</th>
+                                    <td th:text="${product.nameVi}">Mark</td>
+                                </tr>
+                                <tr th:if="${product.skuVi!=null}">
+                                    <th scope="row">Mã sản phẩm</th>
+                                    <td th:text="${product.skuVi}">Mark</td>
+                                </tr>
+                                <tr th:if="${product.material!=null}">
+                                    <th scope="row">Chất liệu</th>
+                                    <td th:text="${product.material}">Mark</td>
+                                </tr>
+                                <tr th:if="${product.averageWeight!=null}">
+                                    <th scope="row">Trọng lượng</th>
+                                    <td th:text="${product.averageWeight}">Mark</td>
+                                </tr>
+                                <tr th:if="${product.description!=null}">
+                                    <th scope="row">Sử dụng</th>
+                                    <td th:text="${product.description}">Mark</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Tải ảnh</th>
+                                    <td>
+                                        <a class="color-blue" th:href="${'/tai-xuong?id='+product.id}">Tải ảnh</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="ck-content" th:utext="${product.content}"></div>
+                    </div>
+
+                </div>
+                <a  th:href="@{'/'+${categoryDefault.slug}}" class="d-block text-center color-blue">Chuyên mục:[[${categoryDefault.name}]]</a>
+                <a  th:href="${link}" class="d-block text-center color-blue">Sản phẩm:[[${product.nameVi}]]- [[${link}]] </a>
+            </div>
+            <!-- End Tab Content -->
+        </div>
+        <!-- End Single Product Tab -->
+        <!-- Related products -->
+        <div class="slick lazy"  data-loader="ajaxloader" data-tab="framebestseller"></div>
+        <!-- End Related products -->
+        <div th:replace="fragment/brand/brand-fragment::brand"></div>
+
+    </div>
+
+</main>
+<!-- ========== END MAIN CONTENT ========== -->
+</body>
+</html>

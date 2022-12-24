@@ -1,0 +1,1 @@
+$FileParentDir$/js/*.js $FileParentDir$/js/services/*.js $FileParentDir$/js/components/*.js $FileParentDir$/js/functions/*.js -o $FileParentDir$/js/publish/themes.min.js

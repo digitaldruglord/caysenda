@@ -1,0 +1,5 @@
+<ul class="row list-unstyled products-group no-gutters" xmlns:th="http://www.thymeleaf.org">
+    <li th:each="product:${products}" class="col-6 col-md-3 col-wd-2gdot4 product-item">
+        <div th:replace="fragment/product/product-item::product-item-type-1(${product})"></div>
+    </li>
+</ul>

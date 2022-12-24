@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="tab-content(products,productGallery)" class="row no-gutters">
+        <div class="col-md-12 col-wd-12 d-md-flex d-wd-block">
+            <ul class="row list-unstyled products-group no-gutters mb-0 flex-wd-row">
+                <li th:each="product,iter:${products}" class="col-xl-3 col-6 col-sm-6 col-md-3 product-item remove-divider">
+                    <div class="product-item__outer h-100 w-100 prodcut-box-shadow ">
+                        <div class="product-item__inner bg-white p-3 borders-radius-9">
+                            <div class="product-item__body pb-xl-2">
+                                <h5 class="mb-1 product-item__title">
+                                    <a
+                                        th:href="${product.slug}"
+                                        class="text-blue font-weight-bold"
+                                        th:text="${product.name}"/>
+                                </h5>
+                                <div class="mb-2">
+                                    <a th:href="${product.slug}"
+                                       class="d-block text-center"><img class="img-fluid product-image-lazy"
+                                                                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIwIiBoZWlnaHQ9IjQ0NSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4="
+                                                                        th:attr="data-src=${product.thumbnail}"
+                                                                        th:alt="${product.name}"></a>
+                                </div>
+                                <div class="flex-center-between mb-1">
+                                    <div class="prodcut-price">
+                                        <div class="text-red"
+                                             th:text="${#numbers.formatDecimal(product.minPrice==null?0:product.minPrice, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}"/>
+                                    </div>
+                                    <div class="d-xl-block open-quickview" th:attr="data-id=${product.id}">
+                                        <a th:href="${product.slug}"
+                                           class="btn-add-cart btn-primary transition-3d-hover"><i
+                                                class="ec ec-add-to-cart"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<urlset xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    <url>
+        <loc>asd</loc>
+        <lastmod>2020-12-21T16:43:47+0700</lastmod>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>asdasd</image:loc>
+            <image:title>asdasf</image:title>
+            <image:caption>asfasf</image:caption>
+        </image:image>
+    </url>
+    <url>
+        <loc>as12d</loc>
+        <lastmod>2020-12-21T16:43:47+0700</lastmod>
+        <priority>1.0</priority>
+    </url>
+</urlset>

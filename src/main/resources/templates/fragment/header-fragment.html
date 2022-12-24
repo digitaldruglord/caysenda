@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:fragment="headerfiles">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header th:fragment="header" id="header" class="u-header u-header-left-aligned-nav">
+    <div class="u-header__section">
+        <!-- Topbar -->
+        <div class="u-header-topbar py-2 d-none d-xl-block">
+            <div class="container">
+                <div class="d-flex align-items-center">
+                    <div class="topbar-left">
+                        <a href="/" class="text-gray-110 font-size-13 hover-on-dark" th:text="${'Chào bạn đến với '+website.title}">Welcome to Worldwide Electronics Store</a>
+                    </div>
+                    <div class="topbar-right ml-auto">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item u-header-topbar__nav-item u-header-topbar__nav-item-no-border mr-0">
+                                <a th:href="${'tel:+'+website.phoneNumber}" class="u-header-topbar__nav-link"><i class="ec ec-phone text-primary mr-1"></i> [[${website.phoneNumber}]]</a>
+                            </li>
+                            <li class="list-inline-item u-header-topbar__nav-item u-header-topbar__nav-item-no-border">
+                                <a th:href="${'mailto:'+website.email}" class="u-header-topbar__nav-link"><i class="ec ec-mail text-primary mr-1"></i> [[${website.email}]]</a>
+                            </li>
+                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                                <a href="/lien-he" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> Địa chỉ</a>
+                            </li>
+                            <li sec:authorize="isAuthenticated()"  class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
+                                <div class="d-flex align-items-center">
+                                    <!-- Language -->
+                                    <div class="position-relative">
+                                        <a id="languageDropdownInvoker" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" role="button"
+                                           aria-controls="languageDropdown"
+                                           aria-haspopup="true"
+                                           aria-expanded="false"
+                                           data-unfold-event="hover"
+                                           data-unfold-target="#languageDropdown"
+                                           data-unfold-type="css-animation"
+                                           data-unfold-duration="300"
+                                           data-unfold-delay="300"
+                                           data-unfold-hide-on-scroll="true"
+                                           data-unfold-animation-in="slideInUp"
+                                           data-unfold-animation-out="fadeOut">
+                                            <span class="d-inline-block d-sm-none">US</span>
+                                            <span class="d-none d-sm-inline-flex align-items-center">
+                                                <i class="ec ec-user mr-1"></i>
+                                                <span sec:authentication="name"></span>
+                                            </span>
+                                        </a>
+
+                                        <div id="languageDropdown" class="dropdown-menu dropdown-unfold" aria-labelledby="languageDropdownInvoker">
+                                            <a class="dropdown-item active" href="/tai-khoan">Thông tin tài khoản</a>
+                                            <a class="dropdown-item" href="/tai-khoan/hoa-don">Thông tin đơn hàng</a>
+                                            <a class="dropdown-item" href="/tai-khoan/dang-xuat">Đăng xuất</a>
+                                        </div>
+                                    </div>
+                                    <!-- End Language -->
+                                </div>
+                            </li>
+                            <li sec:authorize="isAnonymous()" class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                                <!-- Account Sidebar Toggle Button -->
+                                <a  id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link"
+                                   aria-controls="sidebarContent"
+                                   aria-haspopup="true"
+                                   aria-expanded="false"
+                                   data-unfold-event="click"
+                                   data-unfold-hide-on-scroll="false"
+                                   data-unfold-target="#sidebarContent"
+                                   data-unfold-type="css-animation"
+                                   data-unfold-animation-in="fadeInRight"
+                                   data-unfold-animation-out="fadeOutRight"
+                                   data-unfold-target-is-menu="false"
+                                   data-unfold-duration="500">
+                                    <i class="ec ec-user mr-1"></i> <span id="loginbtn">Đăng nhập</span> <span class="text-gray-50">và</span> <span id="registerbtn">đăng ký</span>
+                                </a>
+                                <!-- End Account Sidebar Toggle Button -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Topbar -->
+        <!--        slogan-->
+        <div class="u-header-topbar py-2 d-none d-xl-block slogan-top">
+            <div class="container">
+               <p class="text-center mb-0 font-weight-bold" th:text="${website.slogan}"></p>
+            </div>
+        </div>
+        <!--        end slogan-->
+        <!-- Logo-Search-header-icons -->
+        <div class="py-2 py-xl-5 bg-primary-down-lg nav-logo-search-header">
+            <div class="container my-0dot5 my-xl-0">
+                <div class="row align-items-center">
+                    <!-- Logo-offcanvas-menu -->
+                    <div class="col-auto">
+                        <!-- Nav -->
+                        <nav class="navbar navbar-expand u-header__navbar py-0 justify-content-xl-between max-width-270 min-width-270">
+                            <!-- Logo -->
+                            <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center" href="/" aria-label="Electro">
+                                <img style="width: 11.375rem;" th:src="${website.logo}">
+                            </a>
+                            <!-- End Logo -->
+
+                            <!-- Fullscreen Toggle Button -->
+                            <button id="sidebarHeaderInvokerMenu" type="button" class="navbar-toggler d-block btn u-hamburger mr-3 mr-xl-0"
+                                    aria-controls="sidebarHeader"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                    data-unfold-event="click"
+                                    data-unfold-hide-on-scroll="false"
+                                    data-unfold-target="#sidebarHeader1"
+                                    data-unfold-type="css-animation"
+                                    data-unfold-animation-in="fadeInLeft"
+                                    data-unfold-animation-out="fadeOutLeft"
+                                    data-unfold-duration="500">
+                                        <span id="hamburgerTriggerMenu" class="u-hamburger__box">
+                                            <span class="u-hamburger__inner"></span>
+                                        </span>
+                            </button>
+                            <!-- End Fullscreen Toggle Button -->
+                        </nav>
+                        <!-- End Nav -->
+
+                        <!-- ========== HEADER SIDEBAR ========== -->
+                        <div th:replace="fragment/header/sidebar::header-sidebar"></div>
+                        <th:block></th:block>
+                        <!-- ========== END HEADER SIDEBAR ========== -->
+                    </div>
+                    <!-- End Logo-offcanvas-menu -->
+                    <!-- Search Bar -->
+                    <div class="col d-none d-xl-block" >
+                        <form style="position: relative" class="js-focus-state" id="searchproduct-form">
+                            <label class="sr-only">Tìm kiếm</label>
+                            <div class="input-group">
+                                <input type="text"
+                                       class="form-control py-2 pl-5 font-size-15 border-right-0 height-40 border-width-2 rounded-left-pill border-primary"
+                                       id="searchproduct-item" placeholder="Tìm kiếm" aria-label="Tìm kiếm"
+                                       autocomplete="off"
+                                       th:value="${#httpServletRequest.getParameter('keyword')!=null?#httpServletRequest.getParameter('keyword'):''}"
+                                       aria-describedby="searchProduct1" required>
+                                <div class="input-group-append">
+                                    <!-- Select -->
+                                    <select id="searchcategory" class="js-select selectpicker dropdown-select custom-search-categories-select"
+                                            data-style="btn height-40 text-gray-60 font-weight-normal border-top border-bottom border-left-0 rounded-0 border-primary border-width-2 pl-0 pr-5 py-2">
+                                        <option value="all">Tất cả</option>
+                                        <th:block th:each="category:${categoryList}">
+                                            <option  th:if="${categoryDefault!=null && category.id==categoryDefault.id}" selected th:value="${category.slug}" th:text="${category.name}"></option>
+                                            <option  th:unless="${categoryDefault!=null && category.id==categoryDefault.id}" th:value="${category.slug}" th:text="${category.name}"></option>
+                                        </th:block>
+
+                                    </select>
+                                    <!-- End Select -->
+                                    <button class="btn btn-primary height-40 py-2 px-3 rounded-right-pill" type="button" id="searchProduct1">
+                                        <span class="ec ec-search font-size-24"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="border-primary d-none wrap-content-search" style="position: absolute;top:100%;padding: 10px;border-radius: 10px;width: 100%;z-index: 10000;border:1px solid;border-bottom:5px solid;background: #fff">
+                                <div class="content-search-form" >
+                                    <a th:each="key :${topkeys}" class="d-block" th:href="${'/san-pham?keyword='+key}"><span class="ml-3" th:text="${key}">${item}</span></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- End Search Bar -->
+                    <!-- Header Icons -->
+                    <div class="col col-xl-auto text-right text-xl-left pl-0 pl-xl-3 position-static">
+                        <div class="d-inline-flex">
+                            <ul class="d-flex list-unstyled mb-0 align-items-center">
+                                <!-- Search -->
+                                <li class="col d-xl-none px-2 px-sm-3 position-static">
+                                    <a id="searchClassicInvoker" class="font-size-22 text-gray-90 text-lh-1 btn-text-secondary" href="javascript:;" role="button"
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Tìm kiếm"
+                                       aria-controls="searchClassic"
+                                       aria-haspopup="true"
+                                       aria-expanded="false"
+                                       data-unfold-target="#searchClassic"
+                                       data-unfold-type="css-animation"
+                                       data-unfold-duration="300"
+                                       data-unfold-delay="300"
+                                       data-unfold-hide-on-scroll="true"
+                                       data-unfold-animation-in="slideInUp"
+                                       data-unfold-animation-out="fadeOut">
+                                        <span class="ec ec-search"></span>
+                                    </a>
+
+                                    <!-- Input -->
+                                    <div id="searchClassic" class="dropdown-menu dropdown-unfold dropdown-menu-right left-0 mx-2" aria-labelledby="searchClassicInvoker">
+                                        <form id="form-search-mobile" class="js-focus-state input-group px-3 ">
+                                            <input class="form-control" id="input-value-search-sm" type="search" autocomplete="off" placeholder="Tìm kiếm">
+                                            <div class="input-group-append">
+                                                <button id="submit-search-mobile" class="btn btn-primary px-3 " type="button"><i class="font-size-18 ec ec-search"></i></button>
+                                            </div>
+
+                                        </form>
+                                        <div class="p-3 content-search-sm">
+                                            <a th:each="key :${topkeys}" class="d-block" th:href="${'/san-pham?keyword='+key}"><span class="ml-3" th:text="${key}">${item}</span></a>
+
+                                        </div>
+                                    </div>
+                                    <!-- End Input -->
+                                </li>
+                                <!-- End Search -->
+                                <li sec:authorize="isAnonymous()" class="col d-xl-none px-2 px-sm-3"><a href="/tai-khoan" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Tài khoản"><i class="font-size-22 ec ec-user"></i></a></li>
+                                <li class="col pr-xl-0 px-2 px-sm-3 d-xl-none">
+                                    <a href="/gio-hang" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Giỏ hàng">
+                                        <i class="font-size-22 ec ec-shopping-bag"></i>
+                                        <span class="cart-bag bg-lg-down-black width-22 height-22 bg-primary position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12">0</span>
+                                        <span class="cart-amount d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3">0</span>
+                                    </a>
+                                </li>
+                                <li class="col pr-xl-0 px-2 px-sm-3 d-none d-xl-block">
+                                    <a href="/gio-hang" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Giỏ hàng">
+                                        <i class="font-size-22 ec ec-shopping-bag"></i>
+                                        <span class="cart-bag bg-lg-down-black width-22 height-22 bg-primary position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12">0</span>
+                                        <span class="cart-amount d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3">0</span>
+                                    </a>
+                                </li>
+                                <li sec:authorize="isAuthenticated()" class="col pr-xl-0 px-2 px-sm-3 d-md-none d-xl-none">
+                                    <a  id="sidebarNavTog123gler" href="javascript:;" role="button" class="u-header-topbar__nav-link ml-1"
+                                        aria-controls="menusidebar"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                        data-unfold-event="click"
+                                        data-unfold-hide-on-scroll="false"
+                                        data-unfold-target="#menusidebar"
+                                        data-unfold-type="css-animation"
+                                        data-unfold-animation-in="fadeInRight"
+                                        data-unfold-animation-out="fadeOutRight"
+                                        data-unfold-duration="500">
+                                         <span id="21124rrf" class="u-hamburger__box">
+                                            <span class="u-hamburger__inner"></span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Header Icons -->
+                </div>
+            </div>
+        </div>
+        <!-- End Logo-Search-header-icons -->
+
+        <!-- Vertical-and-secondary-menu -->
+        <div class="d-none d-xl-block container">
+            <div class="row">
+                <!-- Vertical Menu -->
+                <div class="col-md-auto d-none d-xl-block">
+                    <div class="max-width-270 min-width-270">
+                        <!-- Basics Accordion -->
+                        <div id="basicsAccordion">
+                            <!-- Card -->
+                            <div class="card border-0">
+                                <div class="card-header card-collapse border-0" id="basicsHeadingOne">
+                                    <button type="button" class="btn-link btn-remove-focus btn-block d-flex card-btn py-3 text-lh-1 px-4 shadow-none btn-primary rounded-top-lg border-0 font-weight-bold text-gray-90"
+                                            data-toggle="collapse"
+                                            data-target="#basicsCollapseOne"
+                                            aria-expanded="true"
+                                            aria-controls="basicsCollapseOne">
+                                                <span class="ml-0 text-gray-90 mr-2">
+                                                    <span class="fa fa-list-ul"></span>
+                                                </span>
+                                        <span class="pl-1 text-gray-90">Chuyên mục sản phẩm</span>
+                                    </button>
+                                </div>
+                                <div id="basicsCollapseOne"
+                                     th:style="'min-height: 400px'"
+                                     th:classappend="${#httpServletRequest.getRequestURI()=='/'?'show':''}" class="collapse vertical-menu"
+                                     aria-labelledby="basicsHeadingOne"
+                                     data-parent="#basicsAccordion">
+                                    <div class="card-body p-0">
+                                        <nav class="js-mega-menu navbar navbar-expand-xl u-header__navbar u-header__navbar--no-space hs-menu-initialized">
+                                            <div id="navBar" class="collapse navbar-collapse u-header__navbar-collapse">
+                                                <ul class="navbar-nav u-header__navbar-nav">
+                                                    <th:block th:each="menucategory:${navCategory}">
+                                                        <th:block th:switch="${menucategory.children!=null && menucategory.children.size()>0}">
+                                                            <li th:case="true"  class="nav-item hs-has-mega-menu u-header__nav-item custom-hover-navbar"
+                                                                data-event="hover"
+                                                                data-position="left">
+                                                                <a class="nav-link u-header__nav-link u-header__nav-link-toggle"
+                                                                   th:href="${menucategory.href}" aria-haspopup="true"
+                                                                   aria-expanded="false">
+                                                                    <img th:if="${menucategory.icon!=null}" style="max-height: 25px;max-width:25px" th:src="${menucategory.icon}">
+                                                                    <span class="w-100 pl-2">[[${menucategory.name}]]</span>
+                                                                </a>
+                                                                <!-- Nav Item - Mega Menu -->
+                                                                <div th:style="'min-height: 400px;border: 2px solid rgb(253, 73, 10);border-radius: 5px;'" class="hs-mega-menu vmm-tfw u-header__sub-menu"  aria-labelledby="basicMegaMenu1">
+<!--                                                                    <div th:if="${categoryParent.get('data').thumbnail!=null && categoryParent.get('data').thumbnail!=''}" class="vmm-bg">-->
+<!--                                                                        <img class="img-fluid"-->
+<!--                                                                             th:width="400"-->
+<!--                                                                             th:height="300"-->
+<!--                                                                             th:src="${categoryParent.get('data').thumbnail}"-->
+<!--                                                                             alt="">-->
+<!--                                                                    </div>-->
+                                                                    <div class="row u-header__mega-menu-wrapper">
+                                                                        <ul class="u-header__sub-menu-nav-group mb-3" style="height: 370px;display: flex;flex-wrap: wrap;flex-direction: column">
+                                                                            <th:block th:each="child:${menucategory.children}">
+                                                                                <li>
+                                                                                    <a class="nav-link u-header__sub-menu-nav-link font-weight-bold"
+                                                                                       th:href="${child.href}"
+                                                                                       th:text="${child.name}">Lenses</a>
+                                                                                </li>
+                                                                                <th:block th:if="${child.children!=null && child.children.size()>0}">
+                                                                                    <li th:each="child1:${child.children}">
+                                                                                        <a class="nav-link u-header__sub-menu-nav-link"
+                                                                                           th:href="${child1.href}"
+                                                                                           th:text="${child1.name}">Lenses</a>
+                                                                                    </li>
+                                                                                </th:block>
+                                                                            </th:block>
+
+
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- End Nav Item - Mega Menu -->
+                                                            </li>
+                                                            <li th:case="false" class="nav-item u-header__nav-item custom-hover-navbar"
+                                                                data-event="hover"
+                                                                data-position="left">
+                                                                <a th:href="${menucategory.href}"
+                                                                   class="nav-link u-header__nav-link">
+                                                                    <img th:if="${menucategory.icon!=null}" style="max-height: 25px;max-width:25px" th:src="${menucategory.icon}">
+                                                                    <span class="w-100 pl-2">[[${menucategory.name}]]</span>
+                                                                </a>
+                                                            </li>
+                                                        </th:block>
+                                                    </th:block>
+                                                </ul>
+                                            </div>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Card -->
+                        </div>
+                        <!-- End Basics Accordion -->
+                    </div>
+                </div>
+                <!-- End Vertical Menu -->
+                <!-- Secondary Menu -->
+                <div class="col">
+                    <!-- Nav -->
+                    <nav class="js-mega-menu navbar navbar-expand-md u-header__navbar u-header__navbar--no-space">
+                        <!-- Navigation -->
+                        <div id="navBar" class="collapse navbar-collapse u-header__navbar-collapse">
+                            <ul class="navbar-nav u-header__navbar-nav">
+                                <th:block th:each="menu: ${navTop}">
+                                    <th:block th:switch="${menu.children!=null && menu.children.size()>0}">
+                                        <li th:case="true" class="nav-item hs-has-mega-menu u-header__nav-item"
+                                            data-event="hover"
+                                            data-animation-in="slideInUp"
+                                            data-animation-out="fadeOut"
+                                            data-position="left">
+                                            <a id="homeMegaMenu"
+                                               class="nav-link u-header__nav-link u-header__nav-link-toggle text-sale"
+                                               th:text="${menu.name}"
+                                               href="javascript:;" aria-haspopup="true"
+                                               aria-expanded="false">Super Deals</a>
+                                            <!-- Home - Mega Menu -->
+                                            <div class="hs-mega-menu w-100 u-header__sub-menu" aria-labelledby="homeMegaMenu">
+                                                <div class="row u-header__mega-menu-wrapper">
+                                                    <th:block th:each="childlv1: ${menu.children}">
+                                                        <div class="col-md-3">
+                                                            <a th:href="${childlv1.href}" th:text="${childlv1.name}"
+                                                                  class="u-header__sub-menu-title" ></a>
+                                                            <ul class="u-header__sub-menu-nav-group">
+                                                                <li th:each="childlv2:${childlv1.children}">
+                                                                    <a th:href="${childlv2.href}"
+                                                                       th:text="${childlv2.name}"
+                                                                       class="nav-link u-header__sub-menu-nav-link"></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </th:block>
+                                                </div>
+                                            </div>
+                                            <!-- End Home - Mega Menu -->
+                                        </li>
+                                        <li th:case="false" class="nav-item u-header__nav-item ">
+                                            <a class="nav-link u-header__nav-link"
+                                               th:href="${menu.href}" aria-haspopup="true"
+                                               aria-expanded="false"
+                                               th:text="${menu.name}"
+                                               aria-labelledby="blogSubMenu"></a>
+                                        </li>
+                                    </th:block>
+                                </th:block>
+
+                            </ul>
+                            <!-- Customer Care -->
+                            <div class="d-none d-xl-block col-md-auto">
+                                <div class="d-flex">
+                                    <a th:href="${'https://zalo.me/'+website.phoneNumber}"> <img style="width: 40px;" src="/resources/img/lien-he-nomi.gif" alt="contact"></a>
+                                    <div class="ml-2">
+                                        <div class="phone">
+                                            <strong>Số điện thoại:</strong>
+                                            <span class="text-gray-90" th:text="${website.phoneNumber}">(+800) 856 800 604</span>
+                                        </div>
+                                        <div class="email">
+                                            <strong>E-mail: </strong>
+                                            <span class="text-gray-90" th:text="${website.email}">info@electro.com</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Customer Care -->
+                        </div>
+                        <!-- End Navigation -->
+                    </nav>
+                    <!-- End Nav -->
+                </div>
+                <!-- End Secondary Menu -->
+            </div>
+        </div>
+        <!-- End Vertical-and-secondary-menu -->
+    </div>
+</header>
+<!-- ========== END HEADER ========== -->
+</body>
+</html>

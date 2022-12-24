@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+    <title th:text="${data.name}">Home-v1 | Electro - Responsive Website Template</title>
+    <style th:text="${data.css}"></style>
+    <link rel="stylesheet" th:href="@{/resources/scss/form-buynow.css}">
+</head>
+<body>
+<th:block layout:fragment="custom-content">
+    <div th:replace="post-pages/detailt/content::content"></div>
+</th:block>
+</body>
+</html>

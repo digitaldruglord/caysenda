@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <h2 class="font-weight-bold mb-1">Chi tiết đơn hàng</h2>
+        <p class="mb-1 font-weight-bold">Đơn hàng số #[[${order.id}]]</p>
+
+        <p class="mb-1">
+            <span class="font-weight-bold">
+                Trạng thái:
+             </span>
+            <span>[[${orderStatus}]]</span></p>
+        <p class="mb-1">
+            <span class="font-weight-bold">Tra cứu: </span>
+            <a th:if="${tracking!=null}" th:href="${tracking}">Tra cứu đơn hàng</a>
+            <span th:unless="${tracking!=null}">Chưa thể tra cứu</span>
+        </p>
+        <p class="mb-1 font-weight-bold" th:text="${'Ghi chú đơn hàng: '+(order.note!=null?order.note:'Không có')}"></p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th class="w-60" scope="col">Tên sản phẩm</th>
+                <th scope="col">SL</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Tổng</th>
+                <th scope="col" class="text-red font-weight-bold">Nợ</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="detailt,itr:${detailts}" th:classappend="${detailt.quantity<=0?'bg-danger text-white':''}">
+                    <td class="font-weight-bold d-flex align-items-center">
+                        <span>[[${itr.index+1}]]</span>
+                        <a class="d-flex ml-3" th:href="${detailt.slug}">
+                            <img th:if="${detailt.productThumbnail!=null && detailt.productThumbnail!=''}"  style="width: 50px;height: 50px"  th:src="${detailt.variantThumbnail!=null && detailt.variantThumbnail!=''?detailt.variantThumbnail:detailt.productThumbnail}">
+                            <span class="pl-2" th:text="${detailt.name}">Phụ kiện tiểu cảnh</span>
+                            <span class="pl-2" th:text="${detailt.variantName}">Màu xanh</span>
+                         </a>
+                    </td>
+                    <td><span th:text="${detailt.quantity}">100</span> [[${detailt.unit}]]</td>
+                    <td><span th:text="${#numbers.formatDecimal(detailt.price, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}">100.000đ</span></td>
+
+                    <td><span th:text="${#numbers.formatDecimal(detailt.price*detailt.quantity, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}">100.000đ</span></td>
+                    <td><span th:text="${detailt.owe}" class="font-weight-bold text-red">100</span> [[${detailt.unit}]]</td>
+                </tr>
+
+            </tbody>
+            <tfoot>
+                <tr class="font-weight-bold">
+                    <td colspan="4">Tổng sản phẩm</td>
+                    <td th:text="${#numbers.formatDecimal(order.productAmount, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}">100.000đ</td>
+                </tr>
+                <tr class="font-weight-bold">
+                    <td colspan="4">Phí vận chuyển</td>
+                    <td th:text="${#numbers.formatDecimal(order.ship, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}">100.000đ</td>
+                </tr>
+                <tr class="font-weight-bold">
+                    <td colspan="4">Tổng đơn hàng</td>
+                    <td th:text="${#numbers.formatDecimal(order.orderAmount, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}">100.000đ</td>
+                </tr>
+                <tr class="font-weight-bold">
+                    <td colspan="4">Đã thanh toán</td>
+                    <td th:text="${#numbers.formatDecimal(order.paid, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}">100.000đ</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

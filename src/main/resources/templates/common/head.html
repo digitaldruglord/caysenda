@@ -1,0 +1,17 @@
+
+<head th:fragment="common_head(title,links)" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <title th:replace="${title}">The awesome application</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/resources/vendor/font-awesome/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/font-electro.css}">
+    <link rel="stylesheet" th:href="@{/resources/vendor/animate.css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/resources/vendor/hs-megamenu/src/hs.megamenu.css}">
+<!--    <link rel="stylesheet" th:href="@{/resources/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css}">-->
+    <link rel="stylesheet" th:href="@{/resources/vendor/fancybox/jquery.fancybox.css}">
+    <link rel="stylesheet" th:href="@{/resources/vendor/slick-carousel/slick/slick.css}">
+    <link rel="stylesheet" th:href="@{/resources/vendor/bootstrap-select/dist/css/bootstrap-select.min.css}">
+    <th:block th:replace="${links}" />
+</head>

@@ -1,0 +1,44 @@
+.nav-position-fixed{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2000;
+}
+.vh-nav-wrap{
+  .vh-nav-items{
+    .vh-nav-item{
+      position: relative;
+      cursor: pointer;
+      .frame{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #dabbaa;
+        top: 0;
+        right: 0;
+        &::after{
+          content: "";
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          width: 14px;
+          height: 15px;
+          background: url(../img/icon/icon4.png);
+          background-position: 0 -570px;
+        }
+      }
+      &.active{
+        border: 2px solid #ec5609 !important;
+      }
+    }
+  }
+}
+.vh-nav-content{
+  .vh-nav-tab{
+    display: none;
+    &.show{
+      display: block;
+    }
+  }
+}

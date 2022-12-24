@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-account.html}">
+<head>
+    <!-- Title -->
+    <title>Tải ảnh đại diện sản phẩm SKU</title>
+
+</head>
+<body>
+<th:block layout:fragment="custom-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 col-md-3 col-xl-3 d-none-xs d-none-sm">
+                <div th:replace="user/fragment/sidebar::user-sidebar('downloadImages-sku')"></div>
+            </div>
+            <div class="col-sm-12 col-xs-12 col-md-9 col-xl-9">
+                <div class="d-flex justify-content-between align-items-center pt-2" th:each="file :${files}">
+                    <p class="font-size-15 m-0" th:text="${file}">Phụ kiện tiểu cảnh</p>
+                    <a class="btn btn-primary" th:href="${'/resources/zip/'+file}">Tải xuống</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</body>
+</html>

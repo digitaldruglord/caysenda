@@ -1,0 +1,76 @@
+<aside  xmlns:th="http://www.thymeleaf.org" th:fragment="header-sidebar" id="sidebarHeader1" class="u-sidebar u-sidebar--left" aria-labelledby="sidebarHeaderInvoker">
+    <div class="u-sidebar__scroller">
+        <div class="u-sidebar__container">
+            <div class="h-100">
+                <!-- Toggle Button -->
+                <div class="position-absolute top-0 right-0 z-index-2 pt-4 pr-4 bg-white">
+                    <button type="button" class="close ml-auto"
+                            aria-controls="sidebarHeader"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            data-unfold-event="click"
+                            data-unfold-hide-on-scroll="false"
+                            data-unfold-target="#sidebarHeader1"
+                            data-unfold-type="css-animation"
+                            data-unfold-animation-in="fadeInLeft"
+                            data-unfold-animation-out="fadeOutLeft"
+                            data-unfold-duration="500">
+                        <span aria-hidden="true"><i class="ec ec-close-remove text-gray-90 font-size-20"></i></span>
+                    </button>
+                </div>
+                <!-- End Toggle Button -->
+                <!-- Content -->
+                <div class="js-scrollbar u-sidebar__body">
+                    <div id="headerSidebarContent" class="u-sidebar__content u-header-sidebar__content">
+                        <!-- Logo -->
+                        <a class="navbar-brand u-header__navbar-brand u-header__navbar-brand-center mb-3" href="/" th:attr="aria-label=${website.title}" >
+                            <img th:src="${website.logo}">
+                        </a>
+                        <!-- End Logo -->
+
+                        <!-- List -->
+                        <ul id="headerSidebarList" class="u-header-collapse__nav">
+                            <!-- Value of the Day -->
+                            <th:block th:each="menu: ${navCategory}">
+                                <th:block th:switch="${menu.children!=null && menu.children.size()>0}">
+                                    <li th:case="true" class="u-has-submenu u-header-collapse__submenu">
+
+                                        <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer font-weight-bold"
+                                           href="javascript:;" th:attr="data-target=${'#headerSidebar'+menu.id},aria-controls=${'headerSidebar'+menu.id}"
+                                           role="button" data-toggle="collapse" aria-expanded="false" >
+                                            <img style="max-height: 25px;max-width:25px" th:if="${menu.icon!=null && menu.icon!=''}" th:src="${menu.icon}">
+                                            <span class="ml-2" th:text="${menu.name}"></span>
+                                        </a>
+                                        <div th:id="${'headerSidebar'+menu.id}" class="collapse" data-parent="#headerSidebarContent">
+                                            <ul class="u-header-collapse__nav-list">
+                                                <th:block th:each="child:${menu.children}">
+                                                    <li><a class="u-header-sidebar__sub-menu-title" th:href="${child.href}" th:text="${child.name}">Computers &amp; Accessories</a></li>
+                                                    <th:block th:if="${child.children!=null}">
+                                                        <th:block th:each="child1:${child.children}">
+                                                            <li class=""><a class="u-header-collapse__submenu-nav-link" th:href="${child1.href}" th:text="${child1.name}">All Computers & Accessories</a></li>
+                                                        </th:block>
+                                                    </th:block>
+
+                                                </th:block>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li th:case="false" class="">
+                                        <a class="u-header-collapse__nav-link font-weight-bold" th:href="${menu.href}">
+                                            <img style="max-height: 25px;max-width:25px" th:if="${menu.icon!=null && menu.icon!=''}" th:src="${menu.icon}">
+                                            <span class="ml-2" th:text="${menu.name}"></span>
+                                        </a>
+                                    </li>
+
+                                </th:block>
+
+                            </th:block>
+                        </ul>
+                        <!-- End List -->
+                    </div>
+                </div>
+                <!-- End Content -->
+            </div>
+        </div>
+    </div>
+</aside>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- Account Sidebar Navigation -->
+    <aside th:fragment="account-sidebar" id="sidebarContent" class="u-sidebar u-sidebar__lg" aria-labelledby="sidebarNavToggler">
+        <div class="u-sidebar__scroller">
+            <div class="u-sidebar__container">
+                <div class="js-scrollbar u-header-sidebar__footer-offset pb-3">
+                    <!-- Toggle Button -->
+                    <div class="d-flex align-items-center pt-4 px-7">
+                        <button type="button" class="close ml-auto"
+                                aria-controls="sidebarContent"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                data-unfold-event="click"
+                                data-unfold-hide-on-scroll="false"
+                                data-unfold-target="#sidebarContent"
+                                data-unfold-type="css-animation"
+                                data-unfold-animation-in="fadeInRight"
+                                data-unfold-animation-out="fadeOutRight"
+                                data-unfold-duration="500">
+                            <i class="ec ec-close-remove"></i>
+                        </button>
+                    </div>
+                    <!-- End Toggle Button -->
+                    <!-- Content -->
+                    <div class="js-scrollbar u-sidebar__body">
+                        <div class="u-sidebar__content u-header-sidebar__content">
+                            <form class="js-validate">
+                                <!-- Login -->
+                                <div id="login" data-target-group="idForm">
+                                    <!-- Title -->
+                                    <header class="text-center mb-7">
+                                        <p class="h2 mb-0 text-red" th:text="${'Đăng nhập để lưu giỏ hàng'}"/>
+                                    </header>
+                                    <!-- End Title -->
+
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <div class="js-form-message js-focus-state">
+                                            <label class="sr-only" for="signinEmail">Email</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="signinEmailLabel">
+                                                                <span class="fas fa-user"></span>
+                                                            </span>
+                                                </div>
+                                                <input type="text" class="form-control" name="email" id="signinEmail"
+                                                       placeholder="Email | Tài khoản | Số điện thoại" aria-label="text"
+                                                       aria-describedby="signinEmailLabel" required
+                                                       data-msg="Vui lòng nhập email,tài khoản hoặc số điện thoại"
+                                                       data-error-class="u-has-error"
+                                                       data-success-class="u-has-success">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Form Group -->
+
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <div class="js-form-message js-focus-state">
+                                            <label class="sr-only" for="signinPassword">Password</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="signinPasswordLabel">
+                                                            <span class="fas fa-lock"></span>
+                                                        </span>
+                                                </div>
+                                                <input type="password" class="form-control" name="password"
+                                                       id="signinPassword" placeholder="Password" aria-label="Password"
+                                                       aria-describedby="signinPasswordLabel" required
+                                                       data-msg="Your password is invalid. Please try again."
+                                                       data-error-class="u-has-error"
+                                                       data-success-class="u-has-success">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Form Group -->
+
+                                    <div class="d-flex justify-content-end mb-4">
+                                        <a class="js-animation-link small link-muted" href="javascript:;"
+                                           data-target="#forgotPassword"
+                                           data-link-group="idForm"
+                                           data-animation-in="slideInUp">Quên mật khẩu?</a>
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <button type="submit"
+                                                class="btn btn-block btn-sm btn-primary transition-3d-hover ajax-login">Đăng nhập
+                                        </button>
+                                    </div>
+
+                                    <div class="text-center mb-4">
+                                        <span class="small text-muted">Bạn chưa có tài khoản?</span>
+                                        <a class="js-animation-link small text-dark" href="javascript:;"
+                                           data-target="#signup"
+                                           data-link-group="idForm"
+                                           data-animation-in="slideInUp">Đăng ký tài khoản
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Signup -->
+                                <div id="signup" style="display: none; opacity: 0;" data-target-group="idForm">
+                                    <!-- Title -->
+                                    <header class="text-center mb-7">
+                                        <p class="h2 mb-0 text-red" >Tạo tài khoản để quản lý đơn hàng</p>
+                                    </header>
+                                    <div class="notification"></div>
+
+                                    <!-- End Title -->
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <div class="js-form-message js-focus-state">
+                                            <label class="sr-only" for="signupUsername">Tài khoản</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="signupUserNameLabel">
+                                                                <span class="fas fa-user"></span>
+                                                            </span>
+                                                </div>
+                                                <input type="text" class="form-control" name="signupusername" id="signupUsername"
+                                                       placeholder="Tài khoản" aria-label="Tài khoản"
+                                                       aria-describedby="signupUserNameLabel" required
+                                                       data-msg="Vui lòng nhập tài khoản"
+                                                       data-error-class="u-has-error"
+                                                       data-success-class="u-has-success">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <div class="js-form-message js-focus-state">
+                                            <label class="sr-only" for="signupPhone">Số diện thoại</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="phoneLabel">
+                                                                <span class="fas fa-envelope"></span>
+                                                            </span>
+                                                </div>
+                                                <input type="text" class="form-control" name="phone" id="signupPhone"
+                                                       placeholder="Số điện thoại"
+                                                       data-msg="Vui lòng nhập số điện thoại">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <div class="js-form-message js-focus-state">
+                                            <label class="sr-only" for="signupEmail">Email</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="signupEmailLabel">
+                                                                <span class="fas fa-envelope"></span>
+                                                            </span>
+                                                </div>
+                                                <input type="text" class="form-control" name="email" id="signupEmail"
+                                                       placeholder="Email" aria-label="Email"
+                                                       aria-describedby="signupEmailLabel"
+                                                       data-msg="Vui lòng nhập email"
+                                                       data-error-class="u-has-error"
+                                                       data-success-class="u-has-success">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Input -->
+
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <div class="js-form-message js-focus-state">
+                                            <label class="sr-only" for="signupPassword">Mật khẩu</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="signupPasswordLabel">
+                                                                <span class="fas fa-lock"></span>
+                                                            </span>
+                                                </div>
+                                                <input type="password" class="form-control" name="password"
+                                                       id="signupPassword" placeholder="Mật khẩu" aria-label="Password"
+                                                       aria-describedby="signupPasswordLabel" required
+                                                       data-msg="Mật khẩu không hợp lệ vui lòng thử lại"
+                                                       data-error-class="u-has-error"
+                                                       data-success-class="u-has-success">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Input -->
+
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <div class="js-form-message js-focus-state">
+                                            <label class="sr-only" for="signupConfirmPassword">Xác nhận mật khẩu</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="signupConfirmPasswordLabel">
+                                                            <span class="fas fa-key"></span>
+                                                        </span>
+                                                </div>
+                                                <input type="password" class="form-control" name="confirmPassword"
+                                                       id="signupConfirmPassword" placeholder="Xác nhận mật khẩu"
+                                                       aria-label="Confirm Password"
+                                                       aria-describedby="signupConfirmPasswordLabel" required
+                                                       data-msg="Mật khẩu không đúng"
+                                                       data-error-class="u-has-error"
+                                                       data-success-class="u-has-success">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Input -->
+
+                                    <div class="mb-2">
+                                        <button type="submit"
+                                                class="btn btn-block btn-sm btn-primary transition-3d-hover ajax-register">Đăng ký
+                                        </button>
+                                    </div>
+
+                                    <div class="text-center mb-4">
+                                        <span class="small text-muted">Bạn đã có tài khoản?</span>
+                                        <a class="js-animation-link small text-dark" href="javascript:;"
+                                           data-target="#login"
+                                           data-link-group="idForm"
+                                           data-animation-in="slideInUp">Đăng nhập
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <!-- End Signup -->
+
+                                <!-- Forgot Password -->
+                                <div id="forgotPassword" style="display: none; opacity: 0;" data-target-group="idForm">
+                                    <!-- Title -->
+                                    <header class="text-center mb-7">
+                                        <h2 class="h4 mb-0">Quên mật khẩu</h2>
+                                        <p>Vui lòng nhập email của bạn. Chúng tôi sẽ gửi thông tin khôi phục mật khẩu về email của bạn!</p>
+                                    </header>
+                                    <!-- End Title -->
+
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <div class="js-form-message js-focus-state">
+                                            <label class="sr-only" for="recoverEmail">Email </label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="recoverEmailLabel">
+                                                                <span class="fas fa-envelope"></span>
+                                                            </span>
+                                                </div>
+                                                <input type="email" class="form-control" name="email" id="recoverEmail"
+                                                       placeholder="Email" aria-label="Email"
+                                                       aria-describedby="recoverEmailLabel" required
+                                                       data-msg="Please enter a valid email address."
+                                                       data-error-class="u-has-error"
+                                                       data-success-class="u-has-success">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Form Group -->
+
+                                    <div class="mb-2">
+                                        <button type="submit"
+                                                class="btn btn-block btn-sm btn-primary transition-3d-hover ajax-forgotpassword">Khôi phục mật khẩu
+                                        </button>
+                                    </div>
+
+                                    <div class="text-center mb-4">
+                                        <span class="small text-muted">Bạn đã khôi phục mật khẩu?</span>
+                                        <a class="js-animation-link small" href="javascript:;"
+                                           data-target="#login"
+                                           data-link-group="idForm"
+                                           data-animation-in="slideInUp">Đăng nhập
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- End Forgot Password -->
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End Content -->
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- End Account Sidebar Navigation -->
+</body>
+</html>

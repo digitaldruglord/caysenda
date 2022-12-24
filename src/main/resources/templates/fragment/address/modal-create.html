@@ -1,0 +1,55 @@
+<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModal" aria-hidden="true" xmlns:th="http://www.thymeleaf.org">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center font-weight-bold" id="addressModalLabel">Địa chỉ nhận hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="id" field="id" th:value="${address.id}">
+                <div class="form-group">
+                    <label>Họ và tên</label>
+                    <input type="text"  class="form-control border-primary" name="fullname" field="fullname" placeholder="Họ và tên" th:value="${address.fullname}">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text"  class="form-control border-primary" name="email" field="email" placeholder="Email" th:value="${address.email}">
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <input type="text"  class="form-control border-primary" name="phoneNumber" field="phoneNumber" placeholder="Số điện thoại" th:value="${address.phoneNumber}">
+                </div>
+                <div class="form-group">
+                    <label>Thành phố </label>
+                    <select id="provinces" name="province" field="province" class="form-control" data-live-search="true" title="Chọn thành phố">
+
+                        <option th:each="province:${provinces}"  th:selected="${province.id==address.province}" th:value="${province.id}" th:text="${province.name}">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Quận huyện </label>
+                    <select id="dictricts" name="dictrict" field="dictrict" class="form-control" data-live-search="true" title="Chọn quận huyện">
+                        <option th:each="dictrict:${dictricts}"  th:selected="${dictrict.id==address.dictrict}" th:value="${dictrict.id}" th:text="${dictrict.name}">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Phường/Xã</label>
+                    <select id="wards" name="ward" field="ward" class="form-control" data-live-search="true" title="Chọn phường/xã">
+                        <option th:each="ward:${wards}"  th:selected="${ward.id==address.ward}" th:value="${ward.id}" th:text="${ward.name}">1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <input type="text" field="address" class="form-control border-primary" name="address" placeholder="Địa chỉ" th:value="${address.address}">
+                </div>
+                <input th:if="${ref!=null}" type="hidden" field="ref" class="form-control border-primary" name="ref"  th:value="${ref}">
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn btn-primary ajax-submit-address" th:attr="data-ref=${ref}">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-cart}"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <!-- Title -->
+    <title>Giỏ hàng</title>
+</head>
+<body>
+<th:block layout:fragment="custom-content">
+    <div th:replace="cart-pages/content::content"></div>
+</th:block>
+
+</body>
+</html>

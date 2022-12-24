@@ -1,0 +1,10 @@
+$blue:                                                      #0062bd;
+$status: (
+        delivering:$xs,
+        delivered:$sm,
+        returned:$md,
+        damage:$lg,
+        lost:$xl,
+        delivery_fail:$xl
+) !default;
+

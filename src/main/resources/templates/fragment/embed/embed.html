@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <th:block th:fragment="embed">
+            <th:block th:if="${website.embedList!=null && website.embedList.size()>0}">
+                <th:block th:each="embed:${website.embedList}">
+                    <th:block th:utext="${embed.embedCode}"/>
+                </th:block>
+            </th:block>
+    </th:block>
+    <th:block th:fragment="embedSocial">
+        <th:block th:if="${website.embedSocials!=null && website.embedSocials.size()>0}">
+            <th:block th:each="embed:${website.embedSocials}">
+                <th:block th:utext="${embed.embedCode}"/>
+            </th:block>
+        </th:block>
+
+    </th:block>
+</body>
+</html>

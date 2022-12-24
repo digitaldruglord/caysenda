@@ -1,0 +1,144 @@
+$XS:     480px;
+$SM:     768px;
+$MD:    1024px;
+$XL:   1170px;
+// media queries
+@mixin responsive($canvas) {
+  @if $canvas == XS {
+    @media only screen and (min-width: $XS) { @content; }
+  }
+  @else if $canvas == SM {
+    @media only screen and (min-width: $SM) { @content; }
+  }
+  @else if $canvas == MD {
+    @media only screen and (min-width: $MD) { @content; }
+  }
+  @else if $canvas == XL {
+    @media only screen and (min-width: $XL) { @content; }
+  }
+}
+ul{
+  list-style-type: none;
+  padding: 0;
+}
+.buynow-contaier{
+  position: relative;
+  padding: 10px 0 ;
+  .buynow-background{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    &:before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+  }
+
+  .buynow-content{
+    z-index: 10;
+    position: relative;
+    box-shadow: #fff inset;
+    .buynow-headline{
+      text-align: center;
+      color: rgb(255, 235, 59);
+      font-size: 35px;
+      font-weight: bold;
+    }
+    .buynow-cols{
+      @include responsive("XS"){
+        display: block;
+      }
+      @include responsive("SM"){
+        display: block;
+      }
+      @include responsive("MD"){
+        display: grid;
+        grid-template-columns: 60% 40%;
+      }
+      @include responsive("XL"){
+        display: grid;
+        grid-template-columns: 60% 40%;
+      }
+      .buynow-col-left{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .buynow-col-right{
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+
+        .buynow-form{
+          margin: 10px 0;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          input{
+            padding: 10px 5px;
+            border-radius: 25px;
+
+          }
+
+        }
+      }
+    }
+  }
+
+}
+.buynow-ladelement{
+  border: #ffbf1b dotted 5px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  padding: 0 15px;
+  width: 33%;
+
+
+}
+.buynow-border{
+
+}
+.buynow-gap{
+  gap: 10px;
+}
+.buynow-flex{
+  display: flex;
+}
+.buynow-box-shadow{
+  box-shadow: 0px 0px 28px 4px rgba(131, 131, 131, 0.80);
+  padding: 10px;
+  border-radius: 10px;
+}
+.buynow-box{
+  background: #00000080;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  color: #fff;
+  padding: 10px
+}
+.buynow-button{
+  background-color: #ff0000;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  &:hover{
+    background-color: #cf4141;
+  }
+}
+

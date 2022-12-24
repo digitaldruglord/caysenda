@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-account}">
+<head>
+    <!-- Title -->
+    <title>Thông tin tài khoản</title>
+</head>
+<body>
+<th:block layout:fragment="custom-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 col-md-3 col-xl-3 d-none-xs d-none-sm">
+                <div th:replace="user/fragment/sidebar::user-sidebar('profile')"></div>
+            </div>
+            <div class="col-sm-12 col-xs-12 col-md-9 col-xl-9">
+                <div th:replace="user/pages/content/profile::content"></div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-account}"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head >
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<th:block layout:fragment="custom-content">
+    <div class="container">
+
+        <div class="my-4 my-xl-8">
+            <div class="row">
+                <div class="col-md-5 ml-xl-auto mr-md-auto mr-xl-0 mb-8 mb-md-0">
+                    <!-- Title -->
+                    <div class="border-bottom border-color-1 mb-6">
+                        <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Đăng nhập</h3>
+                    </div>
+                    <p class="text-gray-90 mb-4">Chào bạn mừng bạn trở lại. nếu bạn chưa có tài khoản vui lòng <a href="/dang-ky">Đăng ký</a></p>
+                    <!-- End Title -->
+                    <form class="js-validate" novalidate="novalidate">
+                        <!-- Form Group -->
+                        <div class="js-form-message form-group">
+                            <label class="form-label" for="signinEmail">Tài khoản hoặc email
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" name="email" id="signinEmail" placeholder="Tài khoản hoặc email" aria-label="Tài khoản hoặc email" required="" data-msg="Vui lòng nhập tài khoản hoặc email" data-error-class="u-has-error" data-success-class="u-has-success">
+                        </div>
+                        <!-- End Form Group -->
+
+                        <!-- Form Group -->
+                        <div class="js-form-message form-group">
+                            <label class="form-label" for="signinPassword">Mật khẩu <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" name="password" id="signinPassword" placeholder="Password" aria-label="Mật khẩu" required="" data-msg="Mật khẩu không hợp lệ. vui lòng thử lại" data-error-class="u-has-error" data-success-class="u-has-success">
+                        </div>
+                        <!-- End Form Group -->
+
+                        <!-- Button -->
+                        <div class="mb-1">
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary-dark-w px-5 ajax-login">Đăng nhập</button>
+                            </div>
+                            <div class="mb-2">
+                                <a class="text-blue" href="#">Quên mật khẩu?</a>
+                            </div>
+                        </div>
+                        <!-- End Button -->
+                    </form>
+                </div>
+
+                <div class="col-md-5 ml-md-auto ml-xl-0 mr-xl-auto d-none-xs d-none-sm">
+                    <!-- Title -->
+                    <div class="border-bottom border-color-1 mb-6">
+                        <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Đăng ký</h3>
+                    </div>
+                    <p class="text-gray-90 mb-4">Tạo tài khoản ngay hôm nay bạn sẽ được các ưu đãi đặc biệt khi mua sắm các sản phẩm. nếu bạn đã có tài khoản vui lòng <a href="/dang-nhap">Đăng nhập</a></p>
+                    <!-- End Title -->
+                    <!-- Form Group -->
+                    <form class="js-validate" novalidate="novalidate">
+                        <div class="js-form-message form-group mb-5">
+                            <label class="form-label" for="signupUserNameLabel">Tài khoản
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" name="signupusername" id="signupUserNameLabel" placeholder="Tài khoản" aria-label="Tài khoản" required="" data-msg="Vui lòng nhập thông tin tài khoản." data-error-class="u-has-error" data-success-class="u-has-success">
+                        </div>
+                        <div class="js-form-message form-group mb-5">
+                            <label class="form-label" for="signupPhone">Số điện thoại
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" name="phone" id="signupPhone" placeholder="Số điện thoại" aria-label="Số điện thoại" required="" data-msg="Vui lòng nhập địa chỉ số điện thoại hợp lệ.">
+                        </div>
+                        <div class="js-form-message form-group mb-5">
+                            <label class="form-label" for="RegisterSrEmailExample3">Email
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="email" class="form-control" name="email" id="RegisterSrEmailExample3" placeholder="Email address" aria-label="Email address" required="" data-msg="Vui lòng nhập địa chỉ email hợp lệ." data-error-class="u-has-error" data-success-class="u-has-success">
+                        </div>
+                        <div class="js-form-message form-group mb-5">
+                            <label class="form-label" for="signupPassword">Mật khẩu
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="password" class="form-control" name="password" id="signupPassword" placeholder="Email address" aria-label="Mật khẩu" required="" data-msg="Vui lòng nhập mật khẩu." data-error-class="u-has-error" data-success-class="u-has-success">
+                        </div>
+                        <div class="js-form-message form-group mb-5">
+                            <label class="form-label" for="signupConfirmPasswordLabel">Nhập lại mật khẩu
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="password" class="form-control" name="email" id="signupConfirmPasswordLabel" placeholder="Nhập lại mật khẩu" aria-label="Nhập lại mật khẩu" required="" data-msg="Vui lòng nhập lại mật khẩu." data-error-class="u-has-error" data-success-class="u-has-success">
+                        </div>
+                        <!-- End Form Group -->
+                        <p class="text-gray-90 mb-4">Dữ liệu cá nhân của bạn sẽ được sử dụng để hỗ trợ trải nghiệm của bạn trên toàn bộ trang web này, để quản lý tài khoản của bạn và cho các mục đích khác được mô tả trong chính sách bảo mật của chúng tôi.</p>
+                        <!-- Button -->
+                        <div class="mb-6">
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary-dark-w px-5 ajax-register">Đăng ký</button>
+                            </div>
+                        </div>
+                        <!-- End Button -->
+                    </form>
+                    <h3 class="font-size-18 mb-3">Đăng ký tài khoản ngay hôm nay bạn sẽ :</h3>
+                    <ul class="list-group list-group-borderless">
+                        <li class="list-group-item px-0"><i class="fas fa-check mr-2 text-green font-size-16"></i> Thanh toán đơn hàng một cách nhanh chóng</li>
+                        <li class="list-group-item px-0"><i class="fas fa-check mr-2 text-green font-size-16"></i> Kiểm tra đơn hàng một cách dễ dàng</li>
+                        <li class="list-group-item px-0"><i class="fas fa-check mr-2 text-green font-size-16"></i> Ghi lại tất cả giao dịch mà bạn mua</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

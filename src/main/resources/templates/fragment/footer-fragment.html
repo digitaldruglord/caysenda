@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- ========== FOOTER ========== -->
+<footer th:fragment="footer">
+    <div th:replace="fragment/slogan/slogan::slogan"></div>
+    <!-- Footer-bottom-widgets -->
+    <div class="pt-8 pb-4 bg-gray-13">
+        <div class="container mt-1">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="mb-6">
+                        <a href="#" class="d-inline-block">
+                            <img class="max-width-300" th:src="${website.logo}">
+                        </a>
+                    </div>
+                    <div class="mb-4">
+                        <div class="row no-gutters">
+                            <div class="col-auto">
+                                <a th:href="${'https://zalo.me/'+website.phoneNumber}"><img style="width: 40px;" src="/resources/img/lien-he-nomi.gif" alt="contact"></a>
+                            </div>
+                            <div class="col pl-3">
+                                <div class="font-size-13 font-weight-light">Hỗ trợ 24/7</div>
+                                <a class="font-size-20 text-gray-90" th:text="${website.phoneNumber}"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="my-4 my-md-4">
+                        <ul class="list-inline mb-0 opacity-7">
+                            <li class="list-inline-item mr-0">
+                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle"
+                                   href="#">
+                                    <span class="fab fa-facebook-f btn-icon__inner"></span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item mr-0">
+                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle"
+                                   href="#">
+                                    <span class="fab fa-google btn-icon__inner"></span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item mr-0">
+                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle"
+                                   href="#">
+                                    <span class="fab fa-twitter btn-icon__inner"></span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item mr-0">
+                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle"
+                                   href="#">
+                                    <span class="fab fa-github btn-icon__inner"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-12 col-md mb-3 mb-md-0">
+                            <h6 class="mb-3 font-weight-bold">Hổ trợ khách hàng</h6>
+                            <!-- List Group -->
+                            <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
+                                <li th:each="menu:${navFooter1}">
+                                    <a class="list-group-item list-group-item-action"
+                                       th:text="${menu.name}"
+                                       th:href="${menu.href}">Printers & Ink</a>
+                                </li>
+                            </ul>
+                            <!-- End List Group -->
+                        </div>
+                        <div class="col-12 col-md mb-3 mb-md-0">
+                            <h6 class="mb-3 font-weight-bold">Quản lý tài khoản</h6>
+                            <!-- List Group -->
+                            <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
+                                <li th:each="menu:${navFooter2}">
+                                    <a class="list-group-item list-group-item-action"
+                                       th:text="${menu.name}"
+                                       th:href="${menu.href}">Printers & Ink</a>
+                                </li>
+                            </ul>
+                            <!-- End List Group -->
+                        </div>
+                        <div class="col-12 col-md mb-3 mb-md-0">
+                            <h6 class="mb-3 font-weight-bold">Về chúng tôi</h6>
+                            <!-- List Group -->
+                            <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
+                                <li th:each="menu:${navFooter3}">
+                                    <a class="list-group-item list-group-item-action"
+                                       th:text="${menu.name}"
+                                       th:href="${menu.href}">Printers & Ink</a>
+                                </li>
+                            </ul>
+                            <!-- End List Group -->
+                        </div>
+                        <div class="col-12 col-md mb-3 mb-md-0">
+                            <div class="mb-4">
+                                <h6 class="mb-1 font-weight-bold">Địa chỉ</h6>
+                                <address class="" th:text="${website.address}"/>
+                            </div>
+                            <div class="mb-4">
+                                <h6 class="mb-1 font-weight-bold">Số điện thoại</h6>
+                                <address class="" th:text="${website.phoneNumber}"/>
+                            </div>
+                            <div class="mb-4">
+                                <h6 class="mb-1 font-weight-bold">Email</h6>
+                                <address class="" th:text="${website.email}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer-bottom-widgets -->
+    <!-- Footer-copy-right -->
+    <div class="bg-gray-14 py-2">
+        <div class="container">
+            <div class="flex-center-between d-block d-md-flex">
+                <div class="d-md-flex align-items-center" th:if="${(website.linkAIOS!=null && website.linkAIOS!='') || (website.linkANDROID!=null && website.linkANDROID!='')}">
+                    <div class="mb-3 mb-md-0 font-size-20">Tải ứng dụng trên điện thoại</div>
+                    <div class="d-flex mb-3 mb-md-0">
+                        <a th:href="${website.linkAIOS}" class="ml-4 mr-4" th:if="${website.linkAIOS!=null && website.linkAIOS!=''}">
+                           <div class="d-flex align-items-center">
+                               <img class="max-width-5 mr-2" src="/resources/upload/apple-icon.png">
+                               <span class="font-size-20 font-weight-bold">App Store</span>
+                           </div>
+                        </a>
+                        <a th:href="${website.linkANDROID}" class="ml-4 mr-4" th:if="${website.linkANDROID!=null && website.linkANDROID!=''}">
+                            <div class="d-flex align-items-center">
+                                <img class="max-width-5 mr-2" src="/resources/upload/playstore-icon.png">
+                                <span class="font-size-20 font-weight-bold">Google play</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <p class="mr-3 mb-0 font-size-20">Chấp nhận thanh toán</p>
+                    <div class="text-md-right">
+                    <span class="d-inline-block bg-white border rounded p-1">
+                        <img class="max-width-5" src="/resources/upload/cash.png" alt="Image Description">
+                    </span>
+                    <span class="d-inline-block bg-white border rounded p-1">
+                        <img class="max-width-5" src="/resources/upload/visa.png" alt="Image Description">
+                    </span>
+                    <span class="d-inline-block bg-white border rounded p-1">
+                        <img class="max-width-5" src="/resources/upload/mastercard.png" alt="Image Description">
+                    </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- End Footer-copy-right -->
+</footer>
+<!-- ========== END FOOTER ========== -->
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- ========== MAIN CONTENT ========== -->
+<main th:fragment="content" id="content" role="main" class="bg-white">
+    <!-- breadcrumb -->
+    <div class="container content">
+        <div th:utext="${data.content}"></div>
+        <script>
+            $(document).on('ready', function () {
+                $("#provinces").selectpicker('refresh');
+                $("#dictricts").selectpicker('refresh');
+                $("#wards").selectpicker('refresh');
+            })
+        </script>
+    </div>
+
+</main>
+<!-- ========== END MAIN CONTENT ========== -->
+</body>
+</html>

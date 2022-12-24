@@ -1,0 +1,147 @@
+<div xmlns:th="http://www.thymeleaf.org" class="modal fade" id="product-quickview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-modal="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-3 p-0">
+                        <img class="w-100" th:src="${product.thumbnail}">
+                    </div>
+                    <div class="col-9">
+                        <h5 class="modal-title w-100 text-center font-weight-bold line-clamp-4" id="exampleModalLabel" th:text="${product.nameVi}">Phụ kiện tiểu cảnh</h5>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="quickview-product" th:attr="data-product=${jsonproduct}" >
+                    <div th:unless="${isExistGroup}" class="mt-1 mb-1 ">
+                       <th:block th:each="variant :${product.variants}">
+
+                           <div th:if="${variant.stock>0}" class="row m-0 mt-1 mb-1 variant"  th:attr="title=${variant.nameVi},data-id=${variant.id},data-price=${#productUtils.getPriceByTypeNF(priceSetting.priceDefault,variant.vip1,variant.vip2,variant.vip3,variant.vip4,variant.price)},data-stock=${variant.stock}">
+
+                               <th:block th:switch="${variant.thumbnail!=null && variant.thumbnail!=''}">
+                                   <div th:case="true" class="pl-0 col-3 d-flex align-items-center" >
+                                       <div style="width: 40px;height: 40px" >
+                                           <img class="tooltip-element" data-placement="right" data-tooltip="tooltip" th:attr="title=${variant.nameVi}" width="100%" th:src="${variant.thumbnail}" trigger="focus" animation="true">
+                                       </div>
+                                   </div>
+                                   <div th:case="false" class="pl-0 col-3 d-flex align-items-center" >
+                                       <p class="line-clamp-1 mb-0 tooltip-element" data-placement="right" data-tooltip="tooltip" th:attr="title=${variant.nameVi}" th:text="${variant.nameVi}" trigger="focus" animation="true">Phujh</p>
+                                   </div>
+                              </th:block>
+
+                               <div th:if="${isRetailt}" class="col-5 d-flex align-items-center" th:text="${#productUtils.getPriceByType(priceSetting.priceDefault,variant.vip1,variant.vip2,variant.vip3,variant.vip4,variant.price)+' / '+product.unit}">1000000đ</div>
+                               <div th:unless="${isRetailt}" class="col-5 d-flex align-items-center" th:text="${#productUtils.getPriceByType(priceSetting.price1,variant.vip1,variant.vip2,variant.vip3,variant.vip4,variant.price)+' / '+product.unit}">1000000đ</div>
+                               <div class="col-4 border rounded-pill py-2 px-3 border-color-1">
+                                   <div class="js-quantity-quickview row align-items-center justify-content-center">
+                                       <div class="col p-0">
+                                           <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none text-center"
+                                                  type="text" value="0">
+                                       </div>
+                                       <div class="col-auto p-0">
+                                           <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0"
+                                              href="javascript:;">
+                                               <small class="fas fa-minus btn-icon__inner"></small>
+                                           </a>
+                                           <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0"
+                                              href="javascript:;">
+                                               <small class="fas fa-plus btn-icon__inner"></small>
+                                           </a>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </th:block>
+                    </div>
+                    <div th:if="${isExistGroup}" class="mt-1 mb-1">
+                        <div th:each="group:${product.variantGroup}">
+                            <p class="mb-0 border-bottom border-bottom-gray-1" th:text="${group.name}">Phuụ kienj tieur canh</p>
+                            <th:block th:each="variant:${product.variants}">
+
+                                <th:block th:if="${variant.stock>0}">
+                                    <div th:if="${group.skuGroup==variant.parent}" class="row mt-1 mb-1 w-100 ml-0 mr-0 variant" th:attr="data-id=${variant.id},data-price=${#productUtils.getPriceByTypeNF(priceSetting.priceDefault,variant.vip1,variant.vip2,variant.vip3,variant.vip4,variant.price)},data-stock=${variant.stock}">
+                                        <th:block th:switch="${variant.thumbnail!=null && variant.thumbnail!=''}">
+                                            <div th:case="true" class="pl-0 col-3 d-flex align-items-center" >
+                                                <div style="width: 40px;height: 40px"  >
+                                                    <img class="tooltip-element" width="100%" data-placement="right" th:src="${variant.thumbnail}" data-tooltip="tooltip" th:attr="title=${variant.nameVi}" trigger="focus" animation="true">
+                                                </div>
+                                            </div>
+                                            <div th:case="false" class="pl-0 col-3 d-flex align-items-center" >
+                                                <p class="line-clamp-1 mb-0 tooltip-element" th:text="${variant.nameVi}" data-placement="right" data-tooltip="tooltip" th:attr="title=${variant.nameVi}" trigger="focus" animation="true">Phujh</p>
+                                            </div>
+                                        </th:block>
+                                        <div th:if="${isRetailt}" class="col-5 d-flex align-items-center" th:text="${#productUtils.getPriceByType(priceSetting.priceDefault,variant.vip1,variant.vip2,variant.vip3,variant.vip4,variant.price)+' / '+product.unit}">1000000đ</div>
+                                        <div th:unless="${isRetailt}" class="col-5 d-flex align-items-center" th:text="${#productUtils.getPriceByType(priceSetting.price1,variant.vip1,variant.vip2,variant.vip3,variant.vip4,variant.price)+' / '+product.unit}">1000000đ</div>
+                                        <div class="col-4 border rounded-pill py-2 px-3 border-color-1">
+                                            <div class="js-quantity-quickview row align-items-center justify-content-center">
+                                                <div class="col p-0">
+                                                    <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none text-center"
+                                                           type="text" value="0">
+                                                </div>
+                                                <div class="col-auto p-0">
+                                                    <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0"
+                                                       href="javascript:;">
+                                                        <small class="fas fa-minus btn-icon__inner"></small>
+                                                    </a>
+                                                    <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0"
+                                                       href="javascript:;">
+                                                        <small class="fas fa-plus btn-icon__inner"></small>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </th:block>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="border-top border-top-gray-1 pt-2 wrap-confition-price">
+                    <div class="mb-4">
+                        <p class="mb-0 text-center font-weight-bold tooltip-element" title="Bạn cần phải đủ điều kiện mua hàng thì mới có thể thêm vào giỏ hàng" >Điều kiện và mức giá mua hàng</p>
+                        <div  th:if="${isRetailt}"  class="price-condition">
+                            <div style="color: #f53100" class="d-flex justify-content-center align-items-center wrap-price">
+                                <ins class="font-size-36 text-decoration-none font-size-price-sm text-center mr-2" th:text="${#numbers.formatDecimal(min, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}"></ins>
+                                <ins th:if="${min!=max}" class="font-size-36 text-decoration-none font-size-price-sm text-center">-</ins>
+                                <ins th:if="${min!=max}" class="font-size-36 text-decoration-none font-size-price-sm text-center ml-2" th:text="${#numbers.formatDecimal(max, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}"></ins>
+                            </div>
+                            <div style="color: #646464" class="d-flex justify-content-center align-items-center">
+                                <ins class="text-decoration-none text-center" >Tối thiểu: [[${conditiondefault}]] [[${product.unit}]]</ins>
+                            </div>
+                        </div>
+                        <div th:unless="${isRetailt}" class="price-condition">
+                            <div style="color: #f53100" class="row align-items-center wrap-price">
+                                <ins class="col-4 font-size-36 text-decoration-none font-size-price-sm text-center" th:attr="data-range=${1}" th:text="${#productUtils.getPriceByType(priceSetting.price1,product)}">100</ins>
+                                <ins class="col-4 font-size-36 text-decoration-none font-size-price-sm text-center" th:attr="data-range=${2}" th:text="${#productUtils.getPriceByType(priceSetting.price2,product)}">1000</ins>
+                                <ins class="col-4 font-size-36 text-decoration-none font-size-price-sm text-center" th:attr="data-range=${3}" th:text="${#productUtils.getPriceByType(priceSetting.price3,product)}">10000</ins>
+                            </div>
+                            <div style="color: #646464" class="row align-items-center">
+                                <ins class="col-4 text-decoration-none text-center" >Tối thiểu: [[${conditiondefault}]]</ins>
+                                <ins class="col-4 text-decoration-none text-center" >Tối thiểu: [[${condition1}]]</ins>
+                                <ins class="col-4 text-decoration-none text-center" >Tối thiểu: [[${condition2}]]</ins>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="total d-flex justify-content-between border-top border-top-gray-1 pt-2">
+                        <div class="quantity">
+                            <span class="mb-0 label">Số lượng</span>
+                            <span class="mb-0 value font-weight-bold">0</span>
+                        </div>
+                        <div class="price">
+                            <span class="mb-0 label">Tổng tiền</span>
+                            <span class="mb-0 value text-red font-weight-bold">0đ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-primary quickview-add-to-cart" >Thêm vào giỏ</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+            </div>
+        </div>
+    </div>
+</div>

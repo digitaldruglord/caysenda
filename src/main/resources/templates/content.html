@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main th:fragment="content" id="content" role="main" class="bg-white">
+    <!-- Slider Section -->
+    <div class="mb-5">
+        <div class="bg-img-hero" th:style="'background:url(' + ${website.backgroundSlide!=null?website.backgroundSlide:'/resources/img/img1.jpg'} + ');'" >
+            <div class="container min-height-420 overflow-hidden">
+                <div class="row">
+                    <div class="js-slick-carousel u-slick col-md-10 col-xl-10 col-sm-12 p-0"
+                         data-pagi-classes="text-center position-absolute right-0 bottom-0 left-0 u-slick__pagination u-slick__pagination--long justify-content-start mb-3 mb-md-4 offset-xl-3 pl-2 pb-1">
+                        <div th:each="slide:${slideHome}" class="js-slide bg-img-hero-center">
+                            <div class="row min-height-420 py-7 py-md-0">
+                                <div class="offset-xl-3 col-xl-4 col-6 mt-md-8 pl-7">
+                                    <h1 class="font-size-55 text-lh-57 font-weight-light"
+                                        th:text="${slide.title}"
+                                        data-scs-animation-in="fadeInUp">
+                                        THE NEW <span class="d-block font-size-55">STANDARD</span>
+                                    </h1>
+                                    <h6 class="font-size-15 font-weight-bold mb-3"
+                                        data-scs-animation-in="fadeInUp"
+                                        th:text="${slide.description}"
+                                        data-scs-animation-delay="200">UNDER FAVORABLE SMARTWATCHES
+                                    </h6>
+                                    <div class="mb-4"
+                                         data-scs-animation-in="fadeInUp"
+                                         data-scs-animation-delay="300">
+                                        <span class="font-size-13">Giá</span>
+                                        <div class="font-size-50 font-weight-bold text-lh-45">
+                                            <sup class=""></sup>
+                                            <span  th:text="${#numbers.formatDecimal(slide.price==null?0:slide.price, 1, 'DEFAULT', 0, 'DEFAULT')}"></span>
+                                            <sup class="">đ</sup>
+                                        </div>
+                                    </div>
+                                    <a th:href="${slide.href}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
+                                       data-scs-animation-in="fadeInUp"
+                                       data-scs-animation-delay="400">
+                                        Mua ngay
+                                    </a>
+                                </div>
+                                <div class="col-xl-5 col-6  d-flex align-items-center"
+                                     data-scs-animation-in="zoomIn"
+                                     data-scs-animation-delay="500">
+                                    <img class="img-fluid w-100 " style="max-height: 417px" th:src="${slide.thumbnail}" th:alt="${slide.title}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-2 col-sm-12 col-xs-12 p-0 d-none-xs d-none-sm pr-3">
+                        <div class="d-flex flex-column">
+                            <a th:each="baner,index:${bannerTop}" th:href="${baner.href}" class="pl-1 pb-1" th:classappend="${index.index==0?'':'pt-1'}">
+                                <img class="banner-1" th:src="${baner.thumbnail}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <th:block th:if="${banner!=null && banner.size()>0}">
+            <!-- Banner -->
+            <div class="mb-5">
+                <div class="row">
+                    <div class="col-md-6 mb-4 mb-xl-0 col-xl-3" th:each="banner:${banner}">
+                        <a th:href="${banner.href}" class="d-black text-gray-90">
+                            <div class="min-height-132 py-1 d-flex bg-gray-1 align-items-center borders-radius-9">
+                                <div class="col-6 col-xl-5 col-wd-6 pr-0">
+                                    <img class="img-fluid borders-radius-9" th:src="${banner.thumbnail}" alt="Image Description">
+                                </div>
+                                <div class="col-6 col-xl-7 col-wd-6">
+                                    <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23" th:utext="${banner.content}">
+                                        CATCH BIG <strong>DEALS</strong> ON THE CAMERAS
+                                    </div>
+                                    <div class="link text-gray-90 font-weight-bold font-size-15" th:href="${banner.href}">
+                                        Xem ngay
+                                        <span class="link__icon ml-1">
+                                                <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End Banner -->
+        </th:block>
+
+        <!-- Nav Classic -->
+        <div class="position-relative bg-white text-center z-index-2">
+            <ul class="nav nav-classic nav-tab justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active " id="pills-one-example1-tab" data-toggle="pill" nav-classic="true" href="#pills-one-example1" role="tab" aria-controls="pills-one-example1" aria-selected="true" tab="new">
+                        <div class="d-md-flex justify-content-md-center align-items-md-center">
+                            Mới
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="pills-two-example1-tab" data-toggle="pill" nav-classic="true" href="#pills-two-example1" role="tab" aria-controls="pills-two-example1" aria-selected="false" tab="bestselling">
+                        <div class="d-md-flex justify-content-md-center align-items-md-center">
+                            Bán chạy
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="pills-three-example1-tab" data-toggle="pill" nav-classic="true" href="#pills-three-example1" role="tab" aria-controls="pills-three-example1" aria-selected="false" tab="appreciate">
+                        <div class="d-md-flex justify-content-md-center align-items-md-center">
+                            Đánh giá cao
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- End Nav Classic -->
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade pt-2 show active" id="pills-one-example1" role="tabpanel" aria-labelledby="pills-one-example1-tab">
+                <ul class="row list-unstyled products-group no-gutters">
+                    <li th:each="product:${products}" class="col-6 col-md-3 col-wd-2gdot4 product-item">
+                        <div th:replace="fragment/product/product-item::product-item-type-1(${product})"></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane fade pt-2" id="pills-two-example1" role="tabpanel" aria-labelledby="pills-two-example1-tab">
+                <div class="loadding-tab d-flex justify-content-center">
+                    <svg style="width: 200px;height: 200px" version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                              <circle fill="#f5610b" stroke="none" cx="6" cy="50" r="6">
+                                <animateTransform
+                                        attributeName="transform"
+                                        dur="1s"
+                                        type="translate"
+                                        values="0 15 ; 0 -15; 0 15"
+                                        repeatCount="indefinite"
+                                        begin="0.1"/>
+                              </circle>
+                        <circle fill="#f5610b" stroke="none" cx="30" cy="50" r="6">
+                                <animateTransform
+                                        attributeName="transform"
+                                        dur="1s"
+                                        type="translate"
+                                        values="0 10 ; 0 -10; 0 10"
+                                        repeatCount="indefinite"
+                                        begin="0.2"/>
+                              </circle>
+                        <circle fill="#f5610b" stroke="none" cx="54" cy="50" r="6">
+                                <animateTransform
+                                        attributeName="transform"
+                                        dur="1s"
+                                        type="translate"
+                                        values="0 5 ; 0 -5; 0 5"
+                                        repeatCount="indefinite"
+                                        begin="0.3"/>
+                              </circle>
+                            </svg>
+                </div>
+            </div>
+            <div class="tab-pane fade pt-2" id="pills-three-example1" role="tabpanel" aria-labelledby="pills-three-example1-tab">
+                <div class="loadding-tab d-flex justify-content-center">
+                    <svg style="width: 200px;height: 200px" version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                              <circle fill="#f5610b" stroke="none" cx="6" cy="50" r="6">
+                                <animateTransform
+                                        attributeName="transform"
+                                        dur="1s"
+                                        type="translate"
+                                        values="0 15 ; 0 -15; 0 15"
+                                        repeatCount="indefinite"
+                                        begin="0.1"/>
+                              </circle>
+                        <circle fill="#f5610b" stroke="none" cx="30" cy="50" r="6">
+                                <animateTransform
+                                        attributeName="transform"
+                                        dur="1s"
+                                        type="translate"
+                                        values="0 10 ; 0 -10; 0 10"
+                                        repeatCount="indefinite"
+                                        begin="0.2"/>
+                              </circle>
+                        <circle fill="#f5610b" stroke="none" cx="54" cy="50" r="6">
+                                <animateTransform
+                                        attributeName="transform"
+                                        dur="1s"
+                                        type="translate"
+                                        values="0 5 ; 0 -5; 0 5"
+                                        repeatCount="indefinite"
+                                        begin="0.3"/>
+                              </circle>
+                            </svg>
+                </div>
+            </div>
+        </div>
+        <!-- End Tab Content -->
+    </div>
+    <!-- End Slider Section -->
+    <div class="products-group lazy w-100 " style="min-height: 200px" data-loader="ajaxLoadCategory" data-tab="framecategory"></div>
+    <!-- Related products -->
+    <div class="container">
+        <div class="slick lazy"  data-loader="ajaxloader" data-tab="framebestseller"></div>
+    </div>
+    <!-- End Related products -->
+    <div th:replace="fragment/brand/brand-fragment::brand"></div>
+</main>
+<!-- ========== END MAIN CONTENT ========== -->
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="main" class="container">
+        <div class="row">
+           <div class="col-sm-12 col-xs-12 col-md-3 col-xl-3">
+               <div th:replace="user/fragment/sidebar::user-sidebar"></div>
+           </div>
+        </div>
+    </div>
+</body>
+</html>

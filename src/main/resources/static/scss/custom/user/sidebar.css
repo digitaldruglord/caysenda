@@ -1,0 +1,8 @@
+.sidebar-user {
+  list-style-type: none;
+}
+.sidebar-user .sidebar-user-item.active {
+  color: #fa7601;
+}
+
+/*# sourceMappingURL=sidebar.css.map */

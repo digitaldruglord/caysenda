@@ -1,0 +1,229 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hóa đơn</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/resources/css/print/styles.css?v1.2">
+
+</head>
+<body>
+    <div class="container" th:each="order:${orders}" style="page-break-after: always" >
+        <article class="content" style="page-break-after: always">
+            <div class="sender">
+                <h3 class="sendere-name">Người gửi:[[${website.title}]]</h3>
+                <h3 class="sendere-number">Số điện thoại:[[${website.phoneNumber}]]</h3>
+                <h3 class="sendere-address">Địa chỉ:[[${website.address}]]</h3>
+            </div>
+            <div class="receiver border-top">
+                <h3 class="receiver-name">Người nhận:[[${order.fullName}]]</h3>
+                <h3 class="receiver-number">Số điện thoại:[[${order.phoneNumber}]]</h3>
+                <h3 class="receiver-address">
+                    <span>Địa chỉ:</span>
+                    <span>[[${order.fullAddress}]]</span>
+                </h3>
+            </div>
+            <div class="receiver border-top">
+                <h3 class="receiver-name">Mã đơn hàng:[[${order.orderCode}]]</h3>
+                <h3 class="receiver-name" th:text="${'COD:'+#numbers.formatDecimal(order.cod, 1, 'DEFAULT', 0, 'DEFAULT')}"></h3>
+            </div>
+            <div th:if="${order.note!=''}" class="order-note" style="font-size: 20px;border-top: 1px solid;padding-top: 10px">
+                <strong>Ghi chú đơn hàng:</strong>
+                <span>[[${order.note}]]</span>
+            </div>
+
+        </article>
+        <article class="content">
+            <div class="order-brainding">
+                <img th:src="${website.getLogo()}">
+            </div>
+            <div class="order-address">
+                <h3>Địa chỉ nhận hàng</h3>
+                <h4 class="customer-name" th:text="${order.fullName}"></h4>
+                <address class="address">
+                    <span th:text="${order.fullAddress}">${order.billingAddress}</span>
+                </address>
+            </div>
+
+            <div class="clear-both" style="clear: both"></div>
+            <div class="order-info">
+                <h3>hóa đơn</h3>
+                <ul class="info-list">
+                    <li>
+                        <strong>Đơn hàng số</strong>
+                        <span th:text="${order.orderId}"></span>
+                    </li>
+                    <li>
+                        <strong>Ngày đặt hàng</strong>
+                        <span th:text="${#dates.format(order.createDate, 'dd-MM-yyyy')}">124124124</span>
+                    </li>
+                    <li>
+                        <strong>Trạng thái</strong>
+                        <span th:text="${order.status}">${statusList.get(order.statusOrder)}</span>
+                    </li>
+                    <li>
+                        <strong>Phương thức</strong>
+                        <span th:text="${order.method}">${method.title}</span>
+                    </li>
+                    <li>
+                        <strong>Email</strong>
+                        <span th:text="${order.email}">${order.billingEmail}</span>
+                    </li>
+                    <li>
+                        <strong>Số điện thoại</strong>
+                        <span th:text="${order.phoneNumber}">0${order.billingPhoneNumber}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="order-items">
+                <h3>Chi tiết hóa đơn</h3>
+                <div class="detailts">
+                    <div class="detailt-header">
+                        <div class="row-8 th">
+                            <div class="column-1-4">Sản phẩm</div>
+                            <div class="column">Giá</div>
+                            <div class="column">Số lượng</div>
+                            <div class="column">Tổng</div>
+                            <div class="column">Nợ</div>
+                        </div>
+                    </div>
+                    <div class="detailt-content">
+                        <div th:each="detailt,index : ${order.detailts}" class="row-8 " style="page-break-inside: avoid;">
+                            <div class="column column-1-4">
+                                <div class="wrap-image" style="display: flex;align-items: center;gap: 2;position: relative">
+                                    <span style="font-weight: bold;margin-right: 15px" th:text="${index.index+1}"></span>
+                                    <div style="display: inline-flex">
+                                        <img th:if="${detailt.variantThumbnail!=null && !detailt.variantThumbnail.equals('')}" width="50px" class="thumbnail" th:src="${detailt.variantThumbnail}">
+                                        <th:block th:unless="${detailt.variantThumbnail!=null && !detailt.variantThumbnail.equals('')}">
+                                            <img th:if="${detailt.productThumbnail != null && !detailt.productThumbnail.equals('')}" width="50px" class="thumbnail" th:src="${detailt.productThumbnail}">
+                                        </th:block>
+                                        <span class="name-product" style="margin-left: 10px">
+                                            <span th:text="${detailt.name}">${item.product.name} </span>
+                                            <th:block th:if="${detailt.variantName !=null && !detailt.variantName.equals('')}">
+                                                </br>
+                                                <i th:text="${detailt.variantName}">${variation.name}</i></br>
+                                            </th:block>
+                                        </span>
+                                        <span th:if="${detailt.getTopFlag().equals('1')}"
+                                              class="top-tag">HOT</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="column">
+                                <div class="wrap-price">
+                                    <span th:text="${#numbers.formatDecimal(detailt.price, 1, 'DEFAULT', 0, 'DEFAULT')}"></span>
+                                    <span>VNĐ</span>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <span class="quantity" th:text="${detailt.quantity}"/>
+                                <span th:text="${detailt.unit}"/>
+                            </div>
+                            <div class="column">
+                                <div class="wrap-price">
+                                    <span th:text="${#numbers.formatDecimal(detailt.price*detailt.quantity, 1, 'DEFAULT', 0, 'DEFAULT')}"></span>
+                                    <span>VNĐ</span>
+                                </div>
+                            </div>
+                            <div class="column"><span class="quantity" th:text="${detailt.owe}"></span></div>
+                        </div>
+
+                    </div>
+                    <div class="detailt-footer">
+                        <div class="row-1 th border-top border-bottom">
+                            <div class="column">
+                                <div class="row-6">
+                                    <div class="column-1-6">
+                                        <div class="label">Tổng giá trị sản phẩm</div>
+                                    </div>
+                                    <div class="column">
+                                        <div class="wrap-price">
+                                            <span th:text="${#numbers.formatDecimal(order.productAmount, 1, 'DEFAULT', 0, 'DEFAULT')}">124124124 </span>
+                                            <span class="currency">VND</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="row-6">
+                                    <div class="column-1-6">
+                                        <div class="label">Phí giao hàng</div>
+                                    </div>
+                                    <div class="column">
+                                        <div class="wrap-price">
+                                            <span th:text="${#numbers.formatDecimal(order.ship, 1, 'DEFAULT', 0, 'DEFAULT')}">124124124 </span>
+                                            <span class="currency">VND</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="row-6">
+                                    <div class="column-1-6">
+                                        <div class="label">Hoàn tiền</div>
+                                    </div>
+                                    <div class="column">
+                                        <div class="wrap-price">
+                                            <span th:text="${#numbers.formatDecimal(order.refunded, 1, 'DEFAULT', 0, 'DEFAULT')}">1241424 </span>
+                                            <span class="currency">VND</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="row-6">
+                                    <div class="column-1-6">
+                                        <div class="label">Chiết khấu</div>
+                                    </div>
+                                    <div class="column">
+                                        <div class="wrap-price">
+                                            <span th:if="${order.discountType=='PERCENT'}" class="currency">
+                                                 <span th:text="${order.discountValue +'%'}"></span>
+                                            </span>
+                                            <span th:unless="${order.discountType=='PERCENT'}" class="currency">
+                                                <span th:text="${#numbers.formatDecimal(order.discountValue, 1, 'DEFAULT', 0, 'DEFAULT')+' VNĐ'}"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="row-6">
+                                    <div class="column-1-6">
+                                        <div class="label">Tổng giá trị đơn hàng</div>
+                                    </div>
+                                    <div class="column">
+                                        <div class="wrap-price">
+                                            <span th:text="${#numbers.formatDecimal(order.orderAmount, 1, 'DEFAULT', 0, 'DEFAULT')}">ádasd </span>
+                                            <span class="currency">VND</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="row-6">
+                                    <div class="column-1-6">
+                                        <div class="label">Đã thanh toán</div>
+                                    </div>
+                                    <div class="column">
+                                        <div class="wrap-price">
+                                            <span th:text="${#numbers.formatDecimal(order.paid, 1, 'DEFAULT', 0, 'DEFAULT')}">ádasd </span>
+                                            <span class="currency">VND</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${order.note!=''}" class="order-note">
+                <h3>Ghi chú đơn hàng</h3>
+                <div class="content">
+                    <span>[[${order.note}]]</span>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

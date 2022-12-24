@@ -1,0 +1,150 @@
+// Khai báo kích thước tương ứng với màn hình thiết bị
+
+$XS:     480px;
+$SM:     768px;
+$MD:    1024px;
+$XL:   1170px;
+
+// media queries
+$screens: (
+        "xs": XS,
+        "sm": SM,
+        "md":MD,
+        "xl":XL,
+);
+@mixin Responsive($canvas) {
+  @if $canvas == XS {
+    @media only screen and (max-width: $XS) { @content; }
+  }
+  @else if $canvas == SM {
+    @media only screen and (max-width: $SM) { @content; }
+  }
+  @else if $canvas == MD {
+    @media only screen and (min-width: $MD) { @content; }
+  }
+  @else if $canvas == XL {
+    @media only screen and (min-width: $XL) { @content; }
+  }
+}
+
+
+@mixin Grid(){
+  @each $screenname, $screenvalue in $screens{
+    @include Responsive($screenvalue){
+      @for $i from 1 through 10 {
+        .#{$screenname}-grid-#{$i}{
+          display: grid;
+          grid-template-columns: repeat($i, 1fr) !important;
+          &.align-center{
+            .grid-column{
+              display: flex;
+              align-items: center;
+            }
+            @for $j from 1 through 10 {
+              @for $k from 1 through 10 {
+                .#{$screenname}:grid-column-#{$j}-#{$k}{
+                  display: flex;
+                  align-items: center;
+                  grid-column-start: $j;
+                  grid-column-end: $k;
+                }
+              }
+            }
+          }
+          &.th{
+            font-weight: bold;
+            padding: 10px 0;
+          }
+          &.border-top{
+            border-top: 1px solid #c1bcbc;
+          }
+          &.border-bottom{
+            border-bottom: 1px solid #c1bcbc;
+          }
+          &.border-left{
+            border-left: 1px solid #c1bcbc;
+          }
+          &.border-right{
+            border-right: 1px solid #c1bcbc;
+          }
+          &.border{
+            border: 1px solid #c1bcbc;
+          }
+
+          @for $j from 1 through 10 {
+            @for $k from 1 through 10 {
+              .#{$screenname}:grid-column-#{$j}-#{$k}{
+                grid-column-start: $j !important;
+                grid-column-end: $k+1 !important;
+              }
+            }
+          }
+        }
+
+
+      }
+    }
+
+  }
+  @for $gapi from 1 through 100 {
+    .gap-#{$gapi}{
+      gap: #{$gapi}px;
+    }
+  }
+  @for $i from 1 through 10 {
+    .grid-#{$i}{
+      display: grid;
+      grid-template-columns: repeat($i, 1fr);
+
+      &.align-center{
+        .grid-column{
+          display: flex;
+          align-items: center;
+        }
+        @for $j from 1 through 10 {
+          @for $k from 1 through 10 {
+            .grid-column-#{$j}-#{$k}{
+              display: flex;
+              align-items: center;
+              grid-column-start: $j;
+              grid-column-end: $k;
+            }
+          }
+        }
+      }
+      &.th{
+        font-weight: bold;
+        padding: 10px 0;
+      }
+      &.border-top{
+        border-top: 1px solid #c1bcbc;
+      }
+      &.border-bottom{
+        border-bottom: 1px solid #c1bcbc;
+      }
+      &.border-left{
+        border-left: 1px solid #c1bcbc;
+      }
+      &.border-right{
+        border-right: 1px solid #c1bcbc;
+      }
+      &.border{
+        border: 1px solid #c1bcbc;
+      }
+
+      @for $j from 1 through 10 {
+        @for $k from 1 through 10 {
+          .grid-column-#{$j}-#{$k}{
+            grid-column-start: $j;
+            grid-column-end: $k+1;
+          }
+        }
+      }
+    }
+
+
+  }
+
+
+}
+@include Grid();

@@ -1,0 +1,161 @@
+.status-pendding {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #d2ef1d;
+  color: #d608ec;
+  font-weight: bold;
+}
+
+.status-cancel {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: red;
+  color: #000;
+  font-weight: bold;
+}
+
+.status-success {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #04f13f;
+  color: #000;
+  font-weight: bold;
+}
+
+.status-processing {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #a15cea;
+  color: #f8f8f8;
+  font-weight: bold;
+}
+
+.status-awaitingadditionaldelivery {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #3187ef;
+  color: #f8f8f8;
+  font-weight: bold;
+}
+
+.status-failed {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #ff0000;
+  color: #000;
+  font-weight: bold;
+}
+
+.status-shipping {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #e8aa2b;
+  color: #000;
+  font-weight: bold;
+}
+
+.status-refunded {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #f50bbb;
+  color: #000;
+  font-weight: bold;
+}
+
+.status-waitting {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #f50bbb;
+  color: #000;
+  font-weight: bold;
+}
+
+.status-check {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #b58e00;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.status-notenough {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #f50202;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.status-level1 {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #0da225;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.status-level2 {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #f34f22;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.status-level3 {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #e3924d;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.status-level5 {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #0da225;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.status-level6 {
+  padding: 10px;
+  max-width: 85%;
+  min-width: 50%;
+  border-radius: 5px;
+  background-color: #0da225;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=status.css.map */

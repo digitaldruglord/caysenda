@@ -1,0 +1,21 @@
+.sidebar-user{
+  list-style-type: none;
+  padding-left: 0;
+  .sidebar-user-item{
+    padding: 10px 0;
+    font-size: 20px !important;
+    font-weight: 600;
+    a{
+      color: black;
+      &:hover{
+        color: #fa7601 !important;
+      }
+    }
+    &.active{
+      color: #fa7601;
+      a{
+        color: #fa7601 !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="product-item-type-1(product)" class="product-item__outer h-100 w-100">
+        <div class="product-item__inner px-xl-4 p-3 borders-radius-9">
+            <div class="product-item__body pb-xl-2">
+                <h5 class="mb-1 product-item__title">
+                    <a th:text="${product.name}"
+                       th:href="${product.slug}"
+                       class="text-blue font-weight-bold">
+                    </a>
+                </h5>
+                <div class="mb-2 thumbnail-product" >
+                    <th:block th:if="${product.getTopFlag().equals('1')}">
+                       <span class="absolute top-0 left-0">
+                            <span class="top">HOT</span>
+                       </span>
+                    </th:block>
+                    <th:block  th:utext="${#productUtils.getSaleTag(priceSetting,product)}"/>
+                    <a class="d-block text-center"
+                       th:href="${product.slug}">
+                        <img class="img-fluid product-thumbnail product-image-lazy lazy borders-radius-9"
+                             src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIwIiBoZWlnaHQ9IjQ0NSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4="
+                             th:attr="data-src=${product.thumbnail}"
+                             th:alt="${product.categoryName+' '+product.name}">
+                    </a>
+                </div>
+                <div class="row pl-3 pr-3">
+                    <th:block th:each="image,iter :${product.gallery}">
+                        <th:block th:if="${iter.index<=3}">
+                            <th:block th:switch="${iter.index}">
+                                <div th:case="0" class="col-3 p-0 pr-1">
+                                    <img  class="w-100 h-100 product-thumbnail-item product-image-lazy borders-radius-9"
+                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIwIiBoZWlnaHQ9IjQ0NSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4="
+                                          th:attr="data-src=${image}"
+                                          th:alt="${product.categoryName+' '+product.name}">
+                                </div>
+                                <div th:case="3" class="col-3 p-0 pr-1">
+                                    <img class="w-100 h-100 p-0 pl-1 product-thumbnail-item product-image-lazy borders-radius-9"
+                                         src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIwIiBoZWlnaHQ9IjQ0NSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4="
+                                         th:attr="data-src=${image}"
+                                         th:alt="${product.categoryName+' '+product.name}">
+                                </div>
+                                <div th:case="*" class="col-3 p-0 pr-1">
+                                    <img class="w-100 h-100 p-0 pl-1 pr-1 product-thumbnail-item product-image-lazy borders-radius-9"
+                                         src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIwIiBoZWlnaHQ9IjQ0NSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4="
+                                         th:attr="data-src=${image}"
+                                         th:alt="${product.categoryName+' '+product.name}">
+                                </div>
+
+                            </th:block>
+                        </th:block>
+
+                    </th:block>
+
+                </div>
+                <div class="flex-center-between mb-1">
+                    <div class="prodcut-price d-flex align-items-center flex-wrap position-relative">
+                        <ins class="font-size-20 text-red text-decoration-none mr-2 font-weight-bold"
+                             th:utext="${#productUtils.getPriceByType(priceSetting,product)}"></ins>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="text-gray-2">Đã bán:</span>
+                    <span class="text-gray-2">[[${product.sold}]] [[${product.unit}]]</span>
+                </div>
+                <div class="btn-add-cart-quicview open-quickview"  th:attr="data-id=${product.id}">
+                    Thêm giỏ hàng
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:fragment="product-item-type-2(product)" class="product-item__outer h-100 w-100">
+        <div class="product-item__inner p-md-3 row no-gutters borders-radius-9">
+            <div class="col col-lg-auto product-media-left">
+                <a th:href="${product.slug}"
+                   class="max-width-150 d-block"><img class="img-fluid product-image-lazy"
+                                                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIwIiBoZWlnaHQ9IjQ0NSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4="
+                                                      th:attr="data-src=${product.thumbnail}"
+                                                      th:alt="${product.categoryName+' '+product.name}"></a>
+            </div>
+            <div class="col product-item__body pl-2 pl-lg-3 mr-xl-2 mr-wd-1">
+                <div class="mb-4">
+                    <div class="mb-2">
+                        <a th:href="${product.slug}"
+                            class="font-size-12 text-gray-5" th:text="${product.categoryName}"/>
+                    </div>
+                    <h5 class="product-item__title">
+                        <a th:href="${product.slug}"
+                            class="text-blue font-weight-bold"
+                           th:text="${product.name}"
+                        />
+                    </h5>
+                </div>
+                <div class="flex-center-between mb-3">
+                    <div class="prodcut-price">
+                        <div class="text-gray-100 font-weight-bold" th:utext="${#productUtils.getPriceByType(priceSetting,product)}">$629,00</div>
+                    </div>
+                    <div class=" d-xl-block open-quickview" th:attr="data-id=${product.id}">
+                        <a th:href="${product.slug}"
+                           class="btn-add-cart btn-primary transition-3d-hover"><i
+                                class="ec ec-add-to-cart"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <li  th:fragment="product-item-type-3(product,enableRate)" class="product-item product-item__list row no-gutters mb-6 remove-divider">
+        <div class="col-auto">
+            <a th:href="${product.slug}" class="d-block width-75 text-center">
+                <img class="img-fluid"
+                     th:src="${product.thumbnail}"
+                     th:alt="${product.categoryName+' '+product.name}">
+            </a>
+        </div>
+        <div class="col pl-4 d-flex flex-column">
+            <h5 class="product-item__title mb-0">
+                <a th:href="${product.slug}"
+                   class="text-blue font-weight-bold"
+                   th:text="${product.name}"
+                />
+            </h5>
+            <div th:if="${enableRate}" class="text-warning mb-2">
+                <small class="fas fa-star"></small>
+                <small class="fas fa-star"></small>
+                <small class="fas fa-star"></small>
+                <small class="fas fa-star"></small>
+                <small class="fas fa-star"></small>
+            </div>
+            <div class="prodcut-price mt-auto">
+                <div class="font-size-15 font-weight-bold" th:utext="${#productUtils.getPriceByType(priceSetting,product)}"/>
+            </div>
+        </div>
+    </li>
+    <div th:fragment="product-item-type-4(product)" class="row">
+        <div class="col-auto">
+            <a href="../shop/single-product-fullwidth.html" class="d-block width-75">
+                <img class="img-fluid product-image-lazy"
+                     src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIwIiBoZWlnaHQ9IjQ0NSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4="
+                     th:attr="data-src=${product.thumbnail}"
+                     th:alt="${product.categoryName+' '+product.name}">
+            </a>
+        </div>
+        <div class="col">
+            <h3 class="text-lh-1dot2 font-size-14 mb-0">
+                <a th:href="${product.slug}" th:text="${product.name}">Notebook Black Spire V Nitro VN7-591G</a>
+            </h3>
+            <div class="text-warning text-ls-n2 font-size-16 mb-1" style="width: 80px;">
+                <small class="fas fa-star"></small>
+                <small class="fas fa-star"></small>
+                <small class="fas fa-star"></small>
+                <small class="fas fa-star"></small>
+                <small class="far fa-star text-muted"></small>
+            </div>
+            <div class="font-weight-bold">
+                <del class="font-size-11 text-gray-9 d-block "
+                     th:utext="${#productUtils.getPriceByType(priceSetting,product)}">$2299.00</del>
+                <ins class="font-sizeproduct-item__inner-15 text-red text-decoration-none d-block font-weight-bold"
+                     th:utext="${#productUtils.getPriceByType(priceSetting,product)}">$1999.00</ins>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

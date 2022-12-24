@@ -1,0 +1,92 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="wrapper" style="border: 1px solid #ff7279;width: 800px;margin: 0 auto;">
+    <div class="header" style="background-color: #ff956c;color: #fff">
+        <h1 style="text-align: center;margin-top: 0;padding: 10px 0; text-transform: uppercase">[[${title}]]</h1>
+    </div>
+    <div class="content">
+        <div class="title" style="text-align: center">
+            <span style="text-align: center;color: red;text-decoration: underline;font-size: 25px;font-weight: bold;">Đơn hàng số [[${order.id}]]</span>
+        </div>
+        <div class="title" style="text-align: center">
+            <span style="text-align: center;color: red;text-decoration: underline;font-size: 25px;">Trạng thái: [[${status}]]</span>
+        </div>
+        <div style="font-size: 20px;padding: 10px">[[${content}]]</div>
+    </div>
+    <div class="products" style="padding: 5px">
+        <table style="border-collapse: collapse;width: 100%;margin: 0 auto;padding: 5px" border="">
+            <thead style="background-color: #0b0e11;">
+            <tr style="color: #fff;font-size: 20px">
+                <th style="padding: 10px">Tên sản phẩm</th>
+                <th style="padding: 10px">Số lượng</th>
+                <th style="padding: 10px">Giá</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="detailt:${detailts}" style="text-align: center">
+                <td style="padding: 10px">[[${detailt.name}]]-[[${detailt.variantName}]]</td>
+                <td>[[${detailt.quantity}]]</td>
+                <td  th:text="${#numbers.formatDecimal(detailt.price, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}"></td>
+            </tr>
+            </tbody>
+            <tfoot style="text-align: center;border-top: 5px solid">
+            <tr>
+                <td colspan="2" style="padding: 10px"><strong>Tổng giá trị sản phẩm</strong></td>
+                <td>
+                    <span th:text="${#numbers.formatDecimal(order.productAmount, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}">100.000đ</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 10px"><strong>Phí giao hàng</strong></td>
+                <td>
+                    <span th:text="${#numbers.formatDecimal(order.ship, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}">100.000đ</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 10px"><strong>Phương thức thanh toán</strong></td>
+                <td>
+                    <span>[[${method}]]</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 10px"><strong>Tổng cộng</strong></td>
+                <td>
+                    <span th:text="${#numbers.formatDecimal(order.orderAmount, 1, 'DEFAULT', 0, 'DEFAULT')+'đ'}">100.000đ</span>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="address" style="text-align: center;font-weight: bold;margin-bottom: 10px;margin-top: 10px;">
+            <h1 style="color: #96588a;">Thông tin khách hàng:</h1>
+            <div style="width:70%;padding-top: 20px;padding-bottom:20px;border: 1px solid #96588a;color: #96588a;margin: 0 auto">
+                <span>Khách hàng:[[${order.billingFullName}]]</span><br>
+                <span>Số điện thoại:[[${order.billingPhoneNumber}]]</span><br>
+                <span>Địa chỉ:</span>
+                <span th:text="${fulladdress}"></span>
+                <br>
+                <a th:href="${domain}" th:text="${domain}">Đường dẫn trang web</a>
+            </div>
+        </div>
+        <div style="text-align: center;background-color: #ff956c;">
+            <div style="color: #fff;padding: 10px 0;margin-top: 10px;">
+                <h3 style="font-size: 25px;margin: 0" th:text="${website.title}">Cây sen đá</h3>
+                <p th:text="${website.address}">Địa chỉ cửa hàng</p>
+                <h3>Cảm ơn bạn đã mua hàng!!</h3>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="signature" style="text-align: center">
+        <span style="text-transform: uppercase" th:text="${website.title}">Tên trang web</span>
+        <span>Cung cấp <a th:href="${domain}" th:text="${domain}">Đường dẫn web</a></span>
+    </div>
+</div>
+
+
+</body>
+</html>

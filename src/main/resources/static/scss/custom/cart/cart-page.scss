@@ -1,0 +1,109 @@
+.cart-address-list{
+  .cart-address-list-header{
+    .title{
+      font-weight: bold;
+    }
+    @include media-breakpoint-only(xs) {
+      .title{
+        font-size: 1.0em;
+      }
+    }
+    @include media-breakpoint-only(sm) {
+      .title{
+        font-size: 1.0em;
+      }
+    }
+    @include media-breakpoint-only(md) {
+      .title{
+        font-size: 1.3em;
+      }
+    }
+    @include media-breakpoint-only(xl) {
+      .title{
+        font-size: 1.3em;
+      }
+    }
+    @include media-breakpoint-only(wd) {
+      .title{
+        font-size: 1.3em;
+      }
+    }
+  }
+}
+.cart-table {
+  .categories-cart {
+    .category-cart {
+      .category-cart-header {
+        border-bottom: 3px solid #929090;
+      }
+      .products-cart {
+        .product-cart{
+          margin-top: 10px;
+          margin-bottom: 10px;
+          border-bottom: 1px solid #e4e4e4;
+          padding-bottom: 5px;
+          &:last-child{
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+  .footer-content{
+    background: #fed700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 50px;
+    color: black;
+    .summary-cart{
+        @include media-breakpoint-only(xs) {
+          .value{
+              font-size: 1.0em;
+          }
+        }
+        @include media-breakpoint-only(sm) {
+          .value{
+            font-size: 1.0em;
+          }
+        }
+        @include media-breakpoint-only(md) {
+          .value{
+            font-size: 1.3em;
+          }
+        }
+        @include media-breakpoint-only(xl) {
+          .value{
+            font-size: 1.3em;
+          }
+        }
+        @include media-breakpoint-only(wd) {
+          .value{
+            font-size: 1.3em;
+          }
+        }
+
+    }
+    .ajax-payment{
+      background: 0 0;
+      border: 0;
+      font-size: 1em;
+      padding: 10px;
+      background-color: #ff500b;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    &.active{
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0;
+    }
+  }
+}
+.hover-color-red:hover{
+  color: red;
+}

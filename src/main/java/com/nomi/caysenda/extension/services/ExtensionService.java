@@ -1,0 +1,72 @@
+package com.nomi.caysenda.extension.services;
+
+import com.nomi.caysenda.entity.UserEntity;
+import com.nomi.caysenda.exceptions.product.ProductException;
+import com.nomi.caysenda.extension.dto.ExtensionOrderDTO;
+import com.nomi.caysenda.extension.dto.ShopExtensionDTO;
+import com.nomi.caysenda.extension.entity.ExtensionOrderEntity;
+import com.nomi.caysenda.extension.entity.ExtensionProductEntity;
+import com.nomi.caysenda.extension.entity.ExtensionShopEntity;
+import com.nomi.caysenda.extension.entity.ExtensionVariantEntity;
+import com.nomi.caysenda.extension.model.ExtensionOrder;
+import com.nomi.caysenda.extension.model.request.ExtensionRequest;
+import com.nomi.caysenda.extension.model.request.ExtensionShopUpdateRequest;
+import com.nomi.caysenda.extension.model.request.ExtensionUpdateProductRequest;
+import com.nomi.caysenda.extension.model.request.UpdateProductInfo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+
+public interface ExtensionService {
+    Page<ShopExtensionDTO> findAllCriteria(String keyword,Integer userId,Pageable pageable);
+    ExtensionShopEntity findShopById(Integer shopId);
+    Page<ShopExtensionDTO> findAllShop(Pageable pageable);
+    Page<ShopExtensionDTO> findAllByUserExtensionShop_Id(Integer userId,Pageable pageable);
+    List<ExtensionProductEntity> findAllByShop(Integer shopId);
+    Page<ExtensionProductEntity> findAllProduct(Pageable pageable);
+    Page<ExtensionProductEntity> findAllProduct(String keyword,Pageable pageable);
+    Page<ExtensionProductEntity> findAllProductByShopId(Integer shopId, Pageable pageable);
+    Page<ExtensionProductEntity> findAllByShop_IdAndNameZhLikeOrStandardNameLike(Integer shopId,String keyword, Pageable pageable);
+    Page<ExtensionProductEntity> findAllByShop_UserExtensionShop_Id(Integer userId,Pageable pageable);
+    Page<ExtensionProductEntity> findAllByShop_UserExtensionShop_Id(Integer userId,String keyword,Pageable pageable);
+    Page<ExtensionProductEntity> findAllByShop_IdAndShop_UserExtensionShop_Id(Integer shopId,Integer userId,Pageable pageable);
+    List<ExtensionVariantEntity> findAllVariantByProduct(Integer productId);
+    void createProduct(ExtensionRequest extentionRequest);
+    void updateProduct(ExtensionRequest extentionRequest,Boolean updatePrice,Boolean updateStock);
+    void createFromProduct(ExtensionRequest extentionRequest);
+    void deleteByShop(Integer shopId);
+    void deleteByLink(String link);
+    void deleteProductByIds(List<Integer> ids);
+    void deleteProductById(Integer id);
+    ExtensionProductEntity findById(Integer id);
+    Boolean isExistsProduct(String productLink);
+    void updateProduct(ExtensionUpdateProductRequest productRequest);
+    ExtensionProductEntity findByIdAndShop_UserExtensionShop_Id(Integer id,Integer userId);
+    List<UserEntity> findAllEmployee();
+    void authorization(Integer userId,Integer shopId);
+    ExtensionShopEntity updateSKUShop(Integer shopId,String sku);
+    void updateRateAndFactory(Integer shopId,Long rate,Float factorDefault,Float facto1,Float factor2,Float facto3,Float factor4);
+    void generateExcel(Integer shopId,Boolean translate) throws FileNotFoundException;
+    void updateFromExcel(MultipartHttpServletRequest multipartHttpServletRequest) throws IOException;
+    void updateToWeb(Integer shopId,Integer categoryId,List<Integer> providerIds,Integer productId) throws ProductException;
+    void removeToWeb(List<Integer> ids);
+    void downloadImage(Integer shopId) throws FileNotFoundException;
+    void disableSynchronize(Integer productId);
+    void updateQuickEdit(ExtensionShopUpdateRequest updateRequest);
+    void removeSku(Integer shopId);
+    Page<ExtensionOrderDTO> findAllcart(Pageable pageable);
+    ExtensionOrderEntity findCartById(Integer id);
+    ExtensionOrder runAddToCart(String orderId);
+    ExtensionOrderEntity getDataAddToCart(Integer orderId);
+    void updateAddToCart(ExtensionOrder extensionOrder);
+    void deleteCart(Integer id);
+    void fixPrice(Integer id);
+    void updateProductInfo(UpdateProductInfo productInfo);
+    void updateCurrencyRate(Long currentRate);
+    void updateEnablePrice(Integer id,Boolean value);
+
+}

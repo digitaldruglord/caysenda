@@ -1,0 +1,67 @@
+package com.nomi.caysenda.services;
+
+import com.nomi.caysenda.api.admin.model.order.request.AdminOrderQuickviewRequest;
+import com.nomi.caysenda.api.admin.model.order.request.AdminOrderRequest;
+import com.nomi.caysenda.api.admin.model.order.request.AdminOrderSplitRequest;
+import com.nomi.caysenda.api.admin.model.order.request.TrackingOrderRequest;
+import com.nomi.caysenda.controller.requests.order.BuynowRequest;
+import com.nomi.caysenda.controller.responses.payment.PaymentResponse;
+import com.nomi.caysenda.dto.*;
+import com.nomi.caysenda.entity.OrderDetailtEntity;
+import com.nomi.caysenda.entity.OrderEntity;
+import com.nomi.caysenda.entity.TrackingOrderEntity;
+import com.nomi.caysenda.extension.model.request.UpdateTrackingRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+public interface OrderService {
+    List<PrintOrderDTO> getDataPrint(List<Integer> ids);
+    OrderEntity findById(Integer id);
+    OrderEntity merge(Integer from, Integer to);
+    Page<OrderAdminDTO> findAllForOrderAdminDTO(String status, Boolean trash, Integer host, String keyword,String from,String to,Pageable pageable);
+    Page<OrderAdminDTO> findAllForOrderAdminDTO(String keyword,Boolean trash, Pageable pageable);
+    Page<OrderAdminDTO> findAllForOrderAdminDTOByStatus(String keyword,Boolean trash,String status, Pageable pageable);
+    Page<OrderAdminDTO> findAllForOrderAdminDTO(String keyword,Boolean trash,Integer host, Pageable pageable);
+    Page<OrderAdminDTO> findAllForOrderAdminDTOByStatus(String keyword,Boolean trash,String status,Integer host, Pageable pageable);
+    Page<OrderDTO> findAllForOrderDTOByUserId(Integer userId,Pageable pageable);
+    PaymentResponse confirm(String method,String note);
+    OrderEntity save(OrderEntity orderEntity);
+    OrderEntity save(AdminOrderRequest orderRequest);
+    OrderEntity save(String method, String note);
+    void delete(Integer orderId);
+    void deleteByIds(List<Integer> ids);
+    Map<String,String> getMethod();
+    Map<String,String> getStatus();
+    List<Map> changeStatusByIds(List<Integer> ids,String status);
+    void addToTrashByIds(List<Integer> ids);
+    Long fee(Double weight,String address,String ward,String dictrict,String province);
+    List<OrderDetailtEntity> findAllDetailtByOrderId(Integer id);
+    List<AdminOrderDetailDTO> findDetailForAdmin(Integer id);
+    List<OrderEntity> restoreByIds(List<Integer> ids);
+    String getFullAddress(String address,String province,String dictrict,String ward);
+    void update(AdminOrderQuickviewRequest quickviewRequest);
+    Long countByStatus(String status);
+    List<ReportOrderDTO> statisticByArea(String filter,Integer year,Integer host,String status);
+    List<Map> statictisProduct(AdminOrderRequest orderRequest);
+    List<TrackingOrderEntity> findTrackingById(String id);
+    List<TrackingOrderEntity> getTracking(Integer orderId);
+    void updateTrackingOrder(List<TrackingOrderRequest> list);
+    void updateTrackPackage(Integer trackId,Integer trackPackage);
+    List<TrackingOrderEntity> findAllTrackingByStatus(String status);
+    void updateTrackingOrder(UpdateTrackingRequest trackingRequest);
+    void deleteTrackingOrder(Integer id);
+    byte[] generateExcelTrack(List<Integer> ids) throws IOException;
+    Double exchangeRateTracking();
+    StatictisTracking statictisTracking(String month, Integer year);
+    void updateExchangeRateTracking(Double value);
+    byte[] exportOrderToExcel(Integer orderId) throws Exception;
+    byte[] downloadImageFromOrder(Integer orderId) throws Exception;
+    List<OrderWithTrackingDTO> findAllByLaddingCode(String laddingCode);
+    Boolean trackReceiveProduct(Integer id,Integer packageReceived);
+    OrderEntity buynow(BuynowRequest buynowRequest);
+    OrderEntity split(AdminOrderSplitRequest iSplit);
+}

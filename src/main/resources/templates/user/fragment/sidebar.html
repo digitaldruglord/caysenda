@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul  class="list-style-none sidebar-user">
+        <li class="sidebar-user-item" th:classappend="${active=='profile'?'active':''}"><a href="/tai-khoan">Thông tin tài khoản</a></li>
+        <li class="sidebar-user-item" th:classappend="${active=='order'?'active':''}"><a href="/tai-khoan/hoa-don">Đơn hàng của bạn</a></li>
+        <li class="sidebar-user-item" th:classappend="${active=='address'?'active':''}"><a href="/tai-khoan/dia-chi">Địa chỉ nhận hàng</a></li>
+        <li class="sidebar-user-item" th:classappend="${active=='changepassword'?'active':''}"><a href="/tai-khoan/doi-mat-khau">Đổi mật khẩu</a></li>
+        <li class="sidebar-user-item" th:classappend="${active=='downloadThumbnail'?'active':''}"><a href="/tai-khoan/tai-anh-dai-dien">Tải ảnh đại diện sản phẩm </a></li>
+        <li class="sidebar-user-item" th:classappend="${active=='downloadImages'?'active':''}"><a href="/tai-khoan/tai-toan-bo-anh">Tải ảnh sản phẩm </a></li>
+        <li class="sidebar-user-item" th:classappend="${active=='downloadThumbnail-sku'?'active':''}"><a href="/tai-khoan/tai-anh-dai-dien-sku">Tải ảnh đại diện sản phẩm SKU</a></li>
+        <li class="sidebar-user-item" th:classappend="${active=='downloadImages-sku'?'active':''}"><a href="/tai-khoan/tai-toan-bo-anh-sku">Tải ảnh sản phẩm SKU</a></li>
+        <li class="sidebar-user-item" th:classappend="${active=='logout'?'active':''}"><a href="/tai-khoan/dang-xuat">Đăng xuất</a></li>
+    </ul>
+    <!-- List -->
+    <div th:fragment="user-sidebar(active)" id="sidebarNav1Collapse" class="collapse show" data-parent="#sidebarNav">
+        <ul id="sidebarNav1" class="list-unstyled dropdown-list sidebar-user">
+            <li class="sidebar-user-item" th:classappend="${active=='profile'?'active':''}">
+                <a class="p-0 " href="/tai-khoan">
+                    Thông tin tài khoản
+                </a>
+            </li>
+            <li class="sidebar-user-item" th:classappend="${active=='order'?'active':''}">
+                <a class="p-0 " href="/tai-khoan/hoa-don">
+                    Đơn hàng của bạn
+                </a>
+            </li>
+            <li class="sidebar-user-item" th:classappend="${active=='address'?'active':''}">
+                <a class="p-0 " href="/tai-khoan/dia-chi">
+                    Địa chỉ nhận hàng
+                </a>
+            </li>
+            <li class="sidebar-user-item" th:classappend="${active=='changepassword'?'active':''}">
+                <a class="p-0 " href="/tai-khoan/doi-mat-khau">
+                    Đổi mật khẩu
+                </a>
+            </li>
+
+            <li class="sidebar-user-item">
+                <a class="dropdown-toggle dropdown-toggle-collapse"
+                   href="javascript:;" role="button" data-toggle="collapse"
+                   aria-expanded="true"
+                   th:attr="aria-controls='sidebarUserSupport', data-target='#sidebarUserSupport'">
+                        Hổ trợ khách hàng
+                </a>
+
+                <div id="sidebarUserSupport" class="collapse pl-5 show" data-parent="#sidebarNav1">
+                    <ul id="categoryNav" class="list-unstyled dropdown-list">
+                        <!-- Menu List -->
+                        <li class="sidebar-user-item" th:classappend="${active=='downloadThumbnail'?'active':''}"><a href="/tai-khoan/tai-anh-dai-dien">Tải ảnh đại diện sản phẩm</a>
+                        <li class="sidebar-user-item" th:classappend="${active=='downloadImages'?'active':''}"><a href="/tai-khoan/tai-toan-bo-anh">Tải ảnh sản phẩm</a>
+                        <li class="sidebar-user-item" th:classappend="${active=='downloadThumbnail-sku'?'active':''}"><a href="/tai-khoan/tai-anh-dai-dien-sku">Tải ảnh đại diện sản phẩm sku</a>
+                        <li class="sidebar-user-item" th:classappend="${active=='downloadImages-sku'?'active':''}"><a href="/tai-khoan/tai-toan-bo-anh-sku">Tải ảnh sản phẩm</a>
+                        <li class="sidebar-user-item" th:classappend="${active=='download-price-quote'?'active':''}"><a href="/tai-khoan/tai-bao-gia">Tải báo giá</a>
+                        <li class="sidebar-user-item" th:classappend="${active=='download-price-quote-with-thumbnail'?'active':''}"><a href="/tai-khoan/tai-bao-gia-kem-hinh-anh">Tải báo giá kèm hình ảnh</a>
+                        <!-- End Menu List -->
+                    </ul>
+                </div>
+            </li>
+            <li class="sidebar-user-item">
+                <a class="p-0 " href="/tai-khoan/dang-xuat">
+                    Đăng xuất
+                </a>
+            </li>
+            <!-- End Menu List -->
+        </ul>
+    </div>
+    <!-- End List -->
+</body>
+</html>
